@@ -1,0 +1,21 @@
+xianxia_rpg/
+├── index.html      # Página principal
+├── css/
+│   ├── style.css   # Estilos generales
+│   └── ui.css      # Estilos de la interfaz de usuario
+├── js/
+│   ├── main.js     # Lógica principal del juego
+│   ├── character.js# Manejo del personaje
+│   ├── inventory.js# Sistema de inventario
+│   ├── map.js      # Sistema de mapa y exploración
+│   ├── sects.js     # Sistema de sectas
+│   ├── ui.js       # Interfaz de usuario (menús, etc.)
+│   ├── npc.js      # Interacción con NPCs
+│   ├── chat.js     # Sistema de chat
+│   ├── quest.js    # Sistema de misiones
+│   ├── crafting.js # Sistema de crafteo
+│   └── data.js      # Datos del juego (objetos, NPCs, etc.)
+├── assets/
+│   ├── img/        # Imágenes del juego
+│   └── audio/      # Sonidos y música
+└── README.md       # Instrucciones del proyecto

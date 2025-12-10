@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>XianXia Ascensión Eterna</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/ui.css" />
+</head>
+<body>
+  <div id="game-root">
+    <!-- Pantalla de Autenticación -->
+    <div id="auth-screen" class="fullscreen-screen">
+      <div class="auth-panel">
+        <h1 class="game-title">XianXia: Ascensión Eterna</h1>
+        <p class="game-subtitle">Forja tu camino hacia la inmortalidad</p>
+
+        <div class="auth-tabs">
+          <button id="tab-login" class="auth-tab active">Iniciar sesión</button>
+          <button id="tab-register" class="auth-tab">Registrarse</button>
+        </div>
+
+        <div id="login-form" class="auth-form active">
+          <input type="text" id="login-username" placeholder="Nombre de usuario" />
+          <input type="password" id="login-password" placeholder="Contraseña" />
+          <button id="login-button" class="button primary">Entrar</button>
+        </div>
+
+        <div id="register-form" class="auth-form">
+          <input type="text" id="register-username" placeholder="Nombre de usuario" />
+          <input type="password" id="register-password" placeholder="Contraseña" />
+          <button id="register-button" class="button secondary">Crear cuenta</button>
+        </div>
+
+        <div id="auth-message" class="auth-message"></div>
+      </div>
+    </div>
+
+    <!-- Contenedor principal del juego -->
+    <div id="game-container" class="hidden">
+      <header id="top-bar">
+        <div id="logo-area">
+          <span class="logo-text">Ascensión Eterna</span>
+        </div>
+        <div id="top-info">
+          <span id="current-user-label"></span>
+          <button id="logout-button" class="button small">Salir</button>
+        </div>
+      </header>
+
+      <main id="game-layout">
+        <!-- Columna izquierda: perfil + mapa -->
+        <section id="left-panel">
+          <div id="character-profile" class="panel"></div>
+          <div id="map" class="panel"></div>
+        </section>
+
+        <!-- Columna central: escena + diario -->
+        <section id="center-panel">
+          <div id="scene-area" class="panel">
+            <div id="scene-illustration"></div>
+            <div id="scene-description"></div>
+            <div id="scene-actions"></div>
+          </div>
+          <div id="journal-panel" class="panel">
+            <h2>Diario de Cultivación</h2>
+            <div id="journal-entries" class="scrollable"></div>
+          </div>
+        </section>
+
+        <!-- Columna derecha: inventario + chat + ranking -->
+        <section id="right-panel">
+          <div id="inventory" class="panel"></div>
+          <div id="chat" class="panel chat-panel">
+            <h2>Chat Mundial</h2>
+            <div id="chat-messages" class="scrollable"></div>
+            <div id="chat-input-area">
+              <input type="text" id="chat-input" placeholder="Escribe un mensaje..." />
+              <button id="chat-send" class="button small">Enviar</button>
+            </div>
+          </div>
+          <div id="ranking" class="panel">
+            <h2>Rankings</h2>
+            <div id="ranking-list" class="scrollable"></div>
+          </div>
+        </section>
+      </main>
+
+      <footer id="bottom-bar">
+        <button id="btn-open-sect" class="button small">Sectas</button>
+        <button id="btn-open-crafting" class="button small">Crafteo</button>
+        <button id="btn-open-quests" class="button small">Misiones</button>
+        <button id="btn-open-lore" class="button small">Crónicas del Mundo</button>
+      </footer>
+
+      <!-- Overlay para menús modales -->
+      <div id="ui-overlay" class="overlay hidden"></div>
+    </div>
+  </div>
+
+  <!-- Punto de entrada ES Modules -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

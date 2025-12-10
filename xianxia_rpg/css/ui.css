@@ -1,0 +1,105 @@
+/* Menús modales dentro del overlay */
+.menu {
+  background-color: rgba(16, 16, 24, 0.96);
+  border: 1px solid rgba(180, 140, 80, 0.7);
+  border-radius: 8px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+  padding: 18px 22px;
+  color: #eee;
+  max-width: 520px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.menu h2 {
+  font-family: 'Cinzel', serif;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #ffdd99;
+  text-align: center;
+}
+
+.menu p {
+  font-size: 0.9rem;
+}
+
+/* Progreso (ej: HP, Qi, etc.) */
+.progress-bar {
+  width: 100%;
+  height: 14px;
+  background-color: #222;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.progress-bar-fill {
+  background: linear-gradient(90deg, #6ed96e, #4caf50);
+  height: 100%;
+  width: 50%;
+  transition: width 0.3s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.progress-bar-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.7rem;
+}
+
+/* Para Qi / energía */
+.progress-bar.qi .progress-bar-fill {
+  background: linear-gradient(90deg, #42a5f5, #29b6f6);
+}
+
+/* Para experiencia */
+.progress-bar.exp .progress-bar-fill {
+  background: linear-gradient(90deg, #ff9800, #ffc107);
+}
+
+/* Lista simple */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  padding: 3px 0;
+}
+
+/* Diario */
+.journal-entry {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  margin-bottom: 3px;
+  padding-bottom: 3px;
+  font-size: 0.82rem;
+}
+.journal-entry time {
+  color: #888;
+  font-size: 0.7rem;
+}
+
+/* Perfil mini mostrado en chat popup */
+.profile-popup {
+  background: rgba(20, 20, 30, 0.98);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 215, 130, 0.6);
+  padding: 12px;
+  max-width: 360px;
+}
+.profile-popup h3 {
+  margin-top: 0;
+  margin-bottom: 6px;
+  font-family: 'Cinzel', serif;
+}
+.profile-popup .popup-row {
+  margin-bottom: 4px;
+  font-size: 0.85rem;
+}

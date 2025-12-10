@@ -1,0 +1,311 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at top, #1a1a1e, #050509);
+  color: #f5f5f5;
+  font-family: 'Roboto', sans-serif;
+  overflow: hidden;
+}
+
+/* Ocultos genéricos */
+.hidden {
+  display: none !important;
+}
+
+/* Pantalla completa (auth, etc.) */
+.fullscreen-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, #14141a, #020205);
+}
+
+/* Panel de auth */
+.auth-panel {
+  background: rgba(10, 10, 15, 0.9);
+  border: 1px solid rgba(160, 120, 60, 0.5);
+  box-shadow: 0 0 25px rgba(255, 200, 120, 0.2);
+  padding: 30px 40px;
+  border-radius: 10px;
+  max-width: 420px;
+  width: 90%;
+}
+
+.game-title {
+  font-family: 'Cinzel', serif;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 5px;
+  color: #ffd27d;
+  text-shadow: 0 0 10px rgba(255, 200, 120, 0.6);
+}
+
+.game-subtitle {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.auth-tabs {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 8px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #aaa;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.auth-tab.active {
+  color: #ffd27d;
+  border-bottom-color: #ffd27d;
+}
+
+.auth-form {
+  display: none;
+}
+
+.auth-form.active {
+  display: block;
+}
+
+.auth-form input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: 1px solid #555;
+  background: #111;
+  color: #eee;
+  box-sizing: border-box;
+}
+
+.auth-message {
+  margin-top: 10px;
+  min-height: 14px;
+  font-size: 0.85rem;
+}
+
+/* Botones */
+.button,
+button {
+  padding: 8px 14px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  background: #444;
+  color: #fff;
+  font-size: 0.9rem;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.button:hover,
+button:hover {
+  background: #666;
+}
+
+.button:active,
+button:active {
+  transform: scale(0.97);
+}
+
+.button.primary {
+  background: linear-gradient(90deg, #ff9800, #ffc107);
+  color: #111;
+}
+
+.button.secondary {
+  background: linear-gradient(90deg, #03a9f4, #00bcd4);
+}
+
+.button.small {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+}
+
+/* Layout del juego */
+#game-container {
+  position: fixed;
+  inset: 0;
+  padding: 6px 10px 6px 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+#top-bar,
+#bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+  background: rgba(7, 7, 12, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#bottom-bar {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: none;
+}
+
+#logo-area {
+  font-family: 'Cinzel', serif;
+  color: #ffd27d;
+  font-size: 1.1rem;
+  text-shadow: 0 0 5px rgba(255, 200, 120, 0.5);
+}
+
+#top-info span {
+  margin-right: 8px;
+  font-size: 0.85rem;
+}
+
+/* Layout principal */
+#game-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.1fr 1.6fr 1.1fr;
+  grid-gap: 8px;
+  padding: 6px 0;
+}
+
+/* Paneles */
+.panel {
+  background: rgba(10, 10, 16, 0.96);
+  border-radius: 8px;
+  border: 1px solid rgba(180, 140, 80, 0.45);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+  padding: 8px;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.panel h2 {
+  margin: 0 0 6px 0;
+  font-size: 1rem;
+  font-family: 'Cinzel', serif;
+  color: #ffdd99;
+}
+
+/* Scrollable util */
+.scrollable {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+/* Chat */
+.chat-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+#chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px;
+  font-size: 0.85rem;
+}
+
+#chat-input-area {
+  display: flex;
+  margin-top: 4px;
+}
+
+#chat-input-area input {
+  flex: 1;
+  padding: 4px 6px;
+  border-radius: 4px 0 0 4px;
+  border: 1px solid #555;
+  background: #111;
+  color: #eee;
+}
+
+#chat-input-area button {
+  border-radius: 0 4px 4px 0;
+}
+
+/* Overlay general */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 3, 8, 0.82);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Scene */
+#scene-area {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#scene-illustration {
+  height: 150px;
+  border-radius: 6px;
+  background: radial-gradient(circle at top, #303040, #101018);
+  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.7);
+  background-size: cover;
+  background-position: center;
+}
+
+#scene-description {
+  min-height: 60px;
+  font-size: 0.9rem;
+}
+
+#scene-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* Mini avatar clickable */
+.chat-avatar {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  margin-right: 4px;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Simple tooltip-looking name */
+.chat-username {
+  font-weight: 600;
+  color: #ffd27d;
+  cursor: pointer;
+}
+
+/* Ranking */
+#ranking-list .ranking-entry {
+  font-size: 0.8rem;
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Scrollbar pequeño */
+.scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollable::-webkit-scrollbar-track {
+  background: #111;
+}
+.scrollable::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 3px;
+}

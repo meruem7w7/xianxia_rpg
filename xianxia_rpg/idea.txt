@@ -1,0 +1,71 @@
+Creación de Juego "XianXia: Ascensión Eterna"
+​Objetivo: Desarrollar un RPG Idle/Clicker de Cultivación (XianXia) con la estética visual actual del proyecto web (negro, dorado, púrpuras místicos).
+​1. 🖼️ Estética Visual (Foco en Negro, Dorado, Púrpura Nebulosa)
+​El estilo debe emular la pantalla de autenticación actual (auth-panel de style.css), evitando el verde neón anterior y priorizando los acentos metálicos y místicos.
+​Fondo General: Oscuro y profundo (#050509 a #1a1a1e), con un sutil gradiente radial que sugiera un espacio cósmico o una noche eterna (similar a body en style.css).
+​Color de Acento Principal: Dorado/Cobre (Hex: #ffd27d o #ffdd99) para títulos, bordes, texto clave y botones principales (similar a .game-title).
+​Color Místico/Energía Qi: Púrpura Profundo y Brillante (Hex: #A020F0 o similar), utilizado para efectos de energía, auras y como box-shadow sutil para paneles importantes.
+​Tipografía: Usar Cinzel para títulos y cabeceras, y Roboto para el texto del cuerpo y la interfaz de usuario, manteniendo una sensación épica y legible.
+​Paneles de UI: Deben ser translúcidos, oscuros (rgba(10, 10, 15, 0.9)), con un borde sutil de color cobre/dorado (rgba(160, 120, 60, 0.5)).
+​2. 👤 Personaje y Efectos de Cultivo
+​Representación del Cultivador: En lugar de un sprite estático, usar un Objeto de Partículas (Particle Emitter) que represente la energía Qi condensada en forma humana (o esférica, como un núcleo).
+​Partículas: Deben ser pequeñas, brillantes, de color Púrpura Místico y Dorado, moviéndose en un patrón lento de levitación (@keyframes levitar).
+​Efecto de Ascensión (Romper Barrera): Cuando el jugador avanza de fase, activar una secuencia de animación:
+​Pantalla blanca/dorada momentánea (flash).
+​Partículas de rayo/trueno (color púrpura místico) rodeando al personaje.
+​Añadir un efecto de Bloom (Brillo) a la pantalla que se disipa lentamente.
+​3. ⚙️ Lógica Central del Juego (Variables y Eventos)
+​Sistema de Progresión (Cultivación):
+​Variables Globales:
+​CultivationPhase: (String, ej: "Qi Gathering")
+​CultivationLevel: (Número, 1 a 10)
+​EssenceVital: (Número, el recurso para cultivar)
+​AttackPower: (Número, se actualiza al ascender).
+​Mecánica de Cultivo (Botón): Al pulsar "Cultivar", reducir EssenceVital en 10 y aumentar CultivationLevel en 1.
+​Mecánica de Ascenso (Romper Barrera):
+​Condición: Si CultivationLevel = 10.
+​Acción: Reproducir el Efecto de Ascensión (sección 2), resetear CultivationLevel a 1, avanzar CultivationPhase (ej: a "Foundation Establishment"), y aumentar AttackPower en un 50%.
+​Inventario y Crafteo:
+​Estructura: Usar variables de Estructura/Array para almacenar Inventario = { item_key: cantidad }.
+​Crafteo: Implementar una ventana (Modal/Capa) donde el jugador pueda combinar materiales (piedra, rama) para crear ítems (espada_piedra), con una comprobación de probabilidad de éxito (similar a la lógica en crafting.txt).
+​4. 🧭 Navegación y Estructura
+​Mapas/Escenas: Usar múltiples Escenas en GDevelop (Aldea, Bosque, Cueva, etc.) para simular el viaje (como en map.txt).
+​Transición: Implementar botones en cada Escena que, al hacer clic, cambien a la Escena conectada (similar a travelTo en map.txt).
+
+
+.............................................
+
+
+Creación de Juego "XianXia: Ascensión Eterna"
+Objetivo: Desarrollar un RPG Idle/Clicker de Cultivación (XianXia) (negro, dorado, púrpuras místicos).
+1. 🖼️ Estética Visual (Foco en Negro, Dorado, Púrpura Nebulosa)
+El estilo priorizando los acentos metálicos y místicos.
+Fondo General: 
+Color de Acento Principal: 
+Color Místico/Energía Qi:
+Tipografía: .
+Paneles de UI: 
+2. 👤 Personaje y Efectos de Cultivo
+Representación del Cultivador: 
+Partículas: 
+Efecto de Ascensión (Romper Barrera): 
+3. ⚙️ Lógica Central del Juego (Variables y Eventos)
+Sistema de Progresión (Cultivación):
+Variables Globales:
+Mecánica de Cultivo:
+Mecánica de Ascenso (Romper Barrera):
+Crafteo: 
+4. 🧭 Navegación y Estructura
+Mapas/Escenas: 
+Transición: 
+
+
+
+
+..............................................
+
+
+
+
+Creación de Juego "XianXia: Ascensión Eterna"
+​Objetivo: Desarrollar un RPG Idle/Clicker de Cultivación (XianXia) con la estética visual actual del proyecto web (negro, dorado, púrpuras místicos).

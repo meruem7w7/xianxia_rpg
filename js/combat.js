@@ -256,20 +256,36 @@ function renderWuXingInterface() {
  * @param {string} skillId - El ID de la habilidad a usar.
  * @returns {void}
  */
+/**
+ * Ejecuta la acción del jugador basada en una habilidad elemental.
+ */
 function executePlayerAction(skillId) {
     if(!combatState.inCombat) return;
     const skill = SKILLS_DB[skillId];
     
+    // --- NUEVO: Verificación de Costo de Esencia ---
+    if (skill.qi_cost > 0) {
+        if (character.essence < skill.qi_cost) {
+            log(`¡No tienes suficiente Esencia! (Req: ${skill.qi_cost})`, 'warning');
+            return; // Cancelar acción
+        }
+        // Descontar esencia
+        character.essence -= skill.qi_cost;
+    }
+    // -----------------------------------------------
+
     // Establecer resonancia elemental basada en la habilidad usada
     combatState.resonance = skill.element;
     renderWuXingInterface();
 
     // Verificar si se interrumpe la canalización del enemigo
     if (combatState.phase === 'CHANNELING') {
+        // Si el enemigo está canalizando, verificamos debilidad
         const weakness = ELEMENTS[combatState.channelingElement].weak;
+        
         if (skill.element === weakness) {
             interruptEnemy();
-            return;
+            return; // El turno del enemigo se cancela porque fue aturdido
         }
     }
 
@@ -277,7 +293,7 @@ function executePlayerAction(skillId) {
     let damage = Math.floor(skill.base_damage + (character.attack * 0.5));
     combatState.enemy.hp = Math.max(0, combatState.enemy.hp - damage);
 
-    log(`Usas ${skill.name} (${damage} daño)`);
+    log(`Usas ${skill.name} (-${skill.qi_cost} Qi) -> ${damage} daño`);
     showFloatingDamage(damage);
     updateCombatBars();
 
@@ -285,42 +301,49 @@ function executePlayerAction(skillId) {
     if (combatState.enemy.hp <= 0) {
         endCombat(true);
     } else {
+        // Turno del enemigo
         setTimeout(enemyTurnLogic, 800);
     }
 }
-
 /**
  * Maneja la lógica del turno del enemigo, incluyendo ataques normales o inicio de canalización.
  * @returns {void}
  */
+/**
+ * Maneja la lógica del turno del enemigo.
+ */
 function enemyTurnLogic() {
     if (!combatState.inCombat) return;
 
-    // Manejar estado de aturdimiento
+    // CASO 1: El enemigo está ATURDIDO
     if (combatState.phase === 'STUNNED') {
         if (combatState.stunDuration > 0) {
             combatState.stunDuration--;
-            log(`${combatState.enemy.name} está aturdido.`, 'warning');
+            log(`${combatState.enemy.name} está aturdido y pierde su turno.`, 'warning');
+            // Si el aturdimiento termina, vuelve a IDLE para el siguiente turno
+            if (combatState.stunDuration <= 0) {
+                combatState.phase = 'IDLE';
+            }
             return;
-        } else {
-            combatState.phase = 'IDLE';
         }
     }
 
-    // Decidir acción: canalizar o atacar
+    // CASO 2: El enemigo estaba CANALIZANDO (Turno de disparar)
+    if (combatState.phase === 'CHANNELING') {
+        performEnemyUltimate();
+        return;
+    }
+
+    // CASO 3: Estado IDLE (Decidir qué hacer)
+    // 30% de probabilidad de cargar habilidad (si tiene esencia suficiente)
     const roll = Math.random();
-    if (roll < 0.3 && combatState.phase === 'IDLE') {
+    const enemyQiCost = 20; // Coste arbitrario para habilidad enemiga
+
+    if (roll < 0.3 && combatState.enemy.essence >= enemyQiCost) {
         startChanneling();
     } else {
-        // Realizar ataque normal
-        const dmg = Math.max(1, combatState.enemy.stats.attack - 2);
-        character.health = Math.max(0, character.health - dmg);
-        log(`${combatState.enemy.name} ataca (-${dmg} HP)`, 'danger');
-        
-        updateCombatBars();
-        persistCharacter();
-        
-        if (character.health <= 0) endCombat(false);
+        // Ataque Normal (No gasta esencia, o muy poca)
+        performEnemyBasicAttack();
     }
 }
 
@@ -415,6 +438,61 @@ function showFloatingDamage(text, isCrit = false) {
         zone.appendChild(el);
         setTimeout(() => el.remove(), 1200);
     }
+}
+
+/**
+ * Ejecuta el ataque cargado del enemigo (Ultimate)
+ */
+function performEnemyUltimate() {
+    const enemyQiCost = 20; // Costo de la habilidad
+    
+    // Consumir esencia del enemigo
+    combatState.enemy.essence = Math.max(0, combatState.enemy.essence - enemyQiCost);
+
+    // Calcular daño masivo (Ej: Ataque x 4)
+    const dmg = Math.floor(combatState.enemy.stats.attack * 4.2);
+    
+    // Aplicar daño
+    character.health = Math.max(0, character.health - dmg);
+    
+    // Visuales y Log
+    log(`¡${combatState.enemy.name} LIBERA SU PODER! (-${dmg} HP)`, 'crit');
+    showFloatingDamage(`-${dmg}`, true); // Muestra daño crítico en pantalla
+    
+    // Limpiar estado
+    combatState.phase = 'IDLE'; // Volver a normal
+    combatState.channelingElement = null;
+    
+    // Quitar el glifo visualmente
+    const layer = document.getElementById('channeling-layer');
+    if(layer) {
+        layer.classList.remove('active');
+        layer.innerHTML = '';
+    }
+
+    updateCombatBars();
+    persistCharacter();
+
+    if (character.health <= 0) endCombat(false);
+}
+
+/**
+ * Ejecuta un ataque básico del enemigo
+ */
+function performEnemyBasicAttack() {
+    // Daño normal un poco variable
+    const baseDmg = combatState.enemy.stats.attack;
+    const variation = Math.floor(Math.random() * 4) - 2; // +/- 2 de daño
+    const dmg = Math.max(1, baseDmg + variation);
+
+    character.health = Math.max(0, character.health - dmg);
+    
+    log(`${combatState.enemy.name} ataca (-${dmg} HP)`, 'danger');
+    
+    updateCombatBars();
+    persistCharacter();
+    
+    if (character.health <= 0) endCombat(false);
 }
 
 /**

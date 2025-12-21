@@ -1,4 +1,4 @@
-// js/godmode.js - V1.6
+// js/godmode.js - V1.7 (Added Essence Refill)
 import { combatState, updateCombatBars } from './combat.js';
 import { character, persistCharacter } from './character.js';
 
@@ -14,6 +14,7 @@ export function initGodMode() {
         font-family: monospace; display: none; border-radius: 8px;
     `;
 
+    // AÑADIDO: Botón "Esencia" en el HTML
     panel.innerHTML = `
         <h3 style="margin:0 0 10px 0; color:gold; text-align:center;">GOD MODE</h3>
         <label>Escala</label><input type="range" id="gm-scale" min="0.5" max="2.0" step="0.1" value="1" style="width:100%">
@@ -21,7 +22,8 @@ export function initGodMode() {
         <label>Y</label><input type="range" id="gm-pos-y" min="-200" max="200" step="10" value="0" style="width:100%">
         <hr style="margin:10px 0; border-color:#333;">
         <button id="gm-kill" style="width:100%; background:#900; color:white; padding:5px; cursor:pointer;">☠️ Matar</button>
-        <button id="gm-heal" style="width:100%; background:#090; color:white; padding:5px; margin-top:5px; cursor:pointer;">💖 Curar</button>
+        <button id="gm-heal" style="width:100%; background:#090; color:white; padding:5px; margin-top:5px; cursor:pointer;">💖 Curar HP</button>
+        <button id="gm-essence" style="width:100%; background:#009; color:white; padding:5px; margin-top:5px; cursor:pointer;">⚡ Llenar Esencia</button>
         <div style="position:absolute; top:5px; right:5px; color:red; cursor:pointer;" onclick="this.parentElement.style.display='none'">X</div>
     `;
     document.body.appendChild(panel);
@@ -40,6 +42,7 @@ export function initGodMode() {
     document.getElementById('gm-pos-x').oninput = (e) => root.style.setProperty('--enemy-pos-x', e.target.value + 'px');
     document.getElementById('gm-pos-y').oninput = (e) => root.style.setProperty('--enemy-pos-y', e.target.value + 'px');
 
+    // BOTÓN MATAR
     document.getElementById('gm-kill').onclick = () => {
         if(combatState.enemy) {
             combatState.enemy.hp = 0;
@@ -48,11 +51,23 @@ export function initGodMode() {
         }
     };
 
+    // BOTÓN CURAR HP
     document.getElementById('gm-heal').onclick = () => {
         if(character) {
             character.health = character.maxHealth;
             persistCharacter();
-            if(window.forceUpdateAll) window.forceUpdateAll();
+            updateCombatBars(); // Actualiza barra en combate
+            if(window.forceUpdateAll) window.forceUpdateAll(); // Actualiza barra en UI principal
+        }
+    };
+
+    // AÑADIDO: BOTÓN LLENAR ESENCIA
+    document.getElementById('gm-essence').onclick = () => {
+        if(character) {
+            character.essence = character.maxEssence; // Rellena al máximo
+            persistCharacter();
+            updateCombatBars(); // Actualiza barra en combate
+            if(window.forceUpdateAll) window.forceUpdateAll(); // Actualiza barra en UI principal
         }
     };
 }

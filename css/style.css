@@ -1,0 +1,558 @@
+/* css/style.css - v1.7 SOLID FIXED */
+
+:root {
+    /* Variables God Mode */
+    --enemy-scale: 1.0;
+    --enemy-pos-x: 0px;
+    --enemy-pos-y: 0px;
+
+    /* Assets */
+    --bg-paper-texture: url('../assets/img/bg_paper_texture.png'); 
+    
+    /* Colores */
+    --ink-parchment: #E8DCC5; 
+    --ink-grey: #8C867A;      
+    --ink-blood: #A61B1B;     
+    --ink-gold: #C5A059;      
+    --gold-bright: #FFD700;
+    --gold-ancient: #C5A059;
+
+    --font-stack-title: 'Zhi Mang Xing', cursive;
+    --font-stack-body: 'Noto Serif SC', serif;
+
+    --bg-panel: rgba(16, 16, 24, 0.98);
+}
+
+/* =========================================
+   1. BASE
+   ========================================= */
+* { box-sizing: border-box; } /* CRÍTICO PARA EVITAR DEFORMACIONES */
+
+body {
+    margin: 0; padding: 0;
+    background-color: #080808;
+    background-image: var(--bg-paper-texture);
+    background-repeat: repeat;
+    background-blend-mode: multiply;
+    background-position: -100px -100px; 
+    color: var(--ink-parchment);
+    font-family: var(--font-stack-body);
+    overflow: hidden; 
+    width: 100vw; height: 100vh;
+}
+
+.hidden { display: none !important; }
+.font-title { font-family: var(--font-stack-title); letter-spacing: 1px; }
+.text-gold { color: var(--gold-ancient); }
+.text-center { text-align: center; }
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: var(--gold-ancient); border-radius: 3px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+
+/* =========================================
+   2. LOGIN (Restaurado)
+   ========================================= */
+.fullscreen-screen {
+    position: fixed; inset: 0; z-index: 2000;
+    display: flex; justify-content: center; align-items: center;
+    background: radial-gradient(circle at top, #14141a, #020205);
+}
+.auth-panel {
+    background: var(--bg-panel); border: 1px solid var(--gold-ancient);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+    padding: 40px; border-radius: 4px; width: 90%; max-width: 400px; text-align: center;
+}
+.auth-tabs { display: flex; margin-bottom: 20px; border-bottom: 1px solid #444; }
+.auth-tab { 
+    flex: 1; padding: 10px; background: none; border: none; color: #666; 
+    cursor: pointer; font-family: var(--font-stack-body); font-weight: bold;
+}
+.auth-tab.active { color: var(--gold-bright); border-bottom: 2px solid var(--gold-bright); }
+
+.auth-form { display: none; }
+.auth-form.active { display: block; animation: fadeIn 0.3s ease; }
+
+.auth-form input { 
+    width: 100%; padding: 10px; margin-bottom: 10px; 
+    background: rgba(0,0,0,0.5); border: 1px solid #555; color: #fff;
+}
+.button {
+    padding: 10px 20px; border: 1px solid var(--gold-ancient);
+    background: #222; color: var(--gold-ancient); cursor: pointer;
+    font-family: var(--font-stack-title); font-size: 1.1rem;
+    transition: all 0.2s; width: 100%; margin-top: 10px;
+}
+.button:hover { background: var(--gold-ancient); color: #000; }
+
+/* =========================================
+   3. LAYOUT PRINCIPAL (Anti-Deformación)
+   ========================================= */
+.game-layout { display: flex; height: 100vh; width: 100%; }
+
+.sidebar-menu {
+    width: 240px; min-width: 240px; /* FIJO */
+    background: rgba(10, 10, 12, 0.98);
+    border-right: 1px solid var(--gold-ancient);
+    display: flex; flex-direction: column; z-index: 100;
+}
+.sidebar-header { padding: 30px 20px; text-align: center; border-bottom: 1px solid #333; }
+.app-logo { font-size: 2.2rem; color: var(--gold-bright); text-shadow: 0 0 10px gold; }
+
+.nav-links { flex: 1; padding: 20px 10px; display: flex; flex-direction: column; gap: 10px; }
+.nav-btn {
+    background: transparent; border: none; color: #888; 
+    padding: 15px; text-align: left; cursor: pointer;
+    font-family: var(--font-stack-title); font-size: 1.3rem;
+    display: flex; align-items: center; gap: 15px;
+    transition: all 0.2s;
+}
+.nav-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
+.nav-btn.active { color: var(--gold-bright); border-left: 3px solid var(--gold-bright); background: rgba(197, 160, 89, 0.1); }
+
+/* CONTENEDOR PRINCIPAL - FIX DEFORMACIÓN */
+#main-content { 
+    flex: 1; 
+    display: flex; flex-direction: column; 
+    position: relative; 
+    width: calc(100% - 200px); /* Restar sidebar */
+} 
+#panels-container { 
+    flex: 1; 
+    padding: 20px; 
+    overflow-y: auto; 
+    width: 100%; 
+}
+
+/* =========================================
+   4. HOGAR (Ajustado)
+   ========================================= */
+#panel-home {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; 
+    height: 100%; width: 100%; gap: 20px;
+}
+
+.hero-card {
+    background: transparent; border: none;
+    display: flex; flex-direction: column; align-items: center;
+    width: 100%; max-width: 600px;
+}
+
+.meditation-container {
+    position: relative; width: 250px; height: 250px;
+    display: flex; justify-content: center; align-items: center;
+    margin-bottom: 0px;
+}
+.home-avatar {
+    width: 200px !important; height: 200px !important;
+    border-radius: 50%; border: 4px solid var(--gold-ancient);
+    object-position: center 5%;
+    object-fit: cover; background: #000; z-index: 2;
+    box-shadow: 0 0 30px var(--gold-ancient);
+    animation: float 4s ease-in-out infinite;
+}
+.avatar-emoji {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.aura-ring {
+    position: absolute; width: 100%; height: 100%;
+    border: 2px dashed rgba(197, 160, 89, 0.4); border-radius: 50%;
+    animation: spinSimple 20s linear infinite;
+}
+.aura-ring.inner { width: 230px; height: 230px; animation-direction: reverse; border-color: rgba(50, 200, 50, 0.3); }
+
+@keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+@keyframes spinSimple { 100% { transform: rotate(360deg); } }
+
+/* Stats Hogar */
+.home-stats-card {
+    background: rgba(0,0,0,0.6); border: 1px solid #444;
+    padding: 25px; border-radius: 8px; width: 100%;
+}
+
+/* =========================================
+   5. HABILIDADES (Ordenado)
+   ========================================= */
+.skills-layout { 
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; width: 100%;
+}
+.skill-card {
+    background: linear-gradient(135deg, rgba(20,20,20,0.9), rgba(40,40,40,0.8));
+    border: 1px solid #444; border-radius: 4px; padding: 15px;
+    display: flex; align-items: center; gap: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+.skill-icon { font-size: 2.5rem; width: 60px; text-align: center; }
+.skill-name { display: block; font-family: var(--font-stack-title); color: var(--gold-bright); font-size: 1.4rem; }
+
+/* =========================================
+   6. COMBATE (SÓLIDO Y CORREGIDO)
+   ========================================= */
+.combat-grid {
+    display: flex; flex-direction: column;
+    height: 100vh; width: 100vw; 
+    position: fixed; /* FIJO ENCIMA DE TODO */
+    top: 0; left: 0;
+    /* FONDO SÓLIDO (La imagen de papel) */
+    background-color: #080808;
+    background-image: var(--bg-paper-texture); 
+    background-repeat: repeat;
+    z-index: 5000; /* Z-INDEX MUY ALTO */
+}
+
+/* ZONA ENEMIGO */
+.combat-enemy-zone {
+    flex: 6; position: relative;
+    display: flex; justify-content: center; align-items: center;
+    overflow: visible; z-index: 5;
+}
+#combat-enemy-sprite {
+    position: relative; height: 50vh; width: auto;
+    transform: translate(var(--enemy-pos-x), var(--enemy-pos-y)) scale(var(--enemy-scale));
+    transition: transform 0.05s linear;
+    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8)); z-index: 10;
+}
+.enemy-render { height: 100%; width: auto; object-fit: contain; }
+
+/* GLIFO DE CARGA (CENTRO ABSOLUTO) */
+.channeling-container {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 780px !important;    /* Tamaño fijo obligatorio */
+    height: 420px !important;   /* Cuadrado perfecto */
+    border-radius: 50%;         /* Hace que el contenedor sea redondo */
+    object-fit: contain;        /* Evita deformación de la imagen */
+    z-index: 1;
+    pointer-events: none;
+    /* La transición suave para cuando cambie de color */
+    transition: filter 0.5s ease;
+}
+.channeling-container.active {
+    opacity: 0.9;
+    animation: spinGlyph 4s linear infinite;
+}
+.channeling-glyph { width: 100%; height: 100%; }
+
+@keyframes spinGlyph {
+    /* Rotación sobre su propio eje manteniendo el centro */
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ZONA CONTROLES */
+.combat-controls-zone {
+    flex: 4; position: relative;
+    background: linear-gradient(to top, #000 20%, rgba(0,0,0,0.95) 60%, transparent 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+    padding-bottom: 30px; z-index: 20;
+}
+
+/* BARRAS DE VIDA Y QI (RUTAS CORREGIDAS) */
+.brush-bar-wrapper {
+    position: relative; width: 100%; height: 35px; margin-bottom: 8px;
+    filter: drop-shadow(0 2px 2px #000);
+}
+.brush-bg {
+    position: absolute; inset: 0;
+    background-image: url('../assets/img/bar_hp_bg.png'); background-size: 100% 100%;
+    z-index: 5; pointer-events: none;
+}
+.brush-fill-container {
+    position: absolute; 
+    top: 8px; bottom: 8px; left: 10px; right: 10px; 
+    background: #111; z-index: 1; border-radius: 4px; overflow: hidden;
+}
+.brush-fill-img {
+    height: 100%; width: 0%; /* Empieza en 0% */
+    background-size: cover; background-position: left center;
+    transition: width 0.3s ease-out;
+}
+/* COLORES Y IMÁGENES */
+.fill-hp {  background-image: url('../assets/img/bar_hp_fill.png'); }
+.fill-qi {  background-image: url('../assets/img/bar_qi_fill.png'); } /* Dorado */
+.fill-qi-enemy {  background-image: url('../assets/img/bar_qi_fill_01.png'); } /* Dorado */
+.fill-essence {  background-image: url('../assets/img/bar_qi_fill_01.png'); } /* Azul/Verde */
+
+.bar-text-overlay {
+    position: absolute; top: -18px; width: 100%;
+    display: flex; justify-content: space-between;
+    font-size: 0.85rem; color: #fff; text-shadow: 0 1px 2px #000; z-index: 10;
+}
+
+.enemy-hud-container { position: absolute; top: -80px; width: 60%; max-width: 500px; z-index: 30; }
+.player-hud-container { 
+    position: fixed; bottom: 20px; left: 20px; 
+    width: 280px; z-index: 100;
+    background: rgba(0,0,0,0.6); padding: 10px; border-radius: 8px; border: 1px solid #444;
+}
+
+/* RUEDA WU XING */
+.wuxing-wrapper { width: 240px; height: 240px; position: relative; margin-bottom: 20px; z-index: 30; }
+.pentagon-svg { width: 100%; height: 100%; position: absolute; top:0; left:0; pointer-events: none; opacity: 0.6; }
+.pentagon-lines { stroke: var(--gold-ancient); stroke-width: 2; fill: none; }
+
+.element-wrapper {
+    position: absolute; width: 50px; height: 50px;
+    transform: translate(-50%, -50%);
+    display: flex; justify-content: center; align-items: center; z-index: 50;
+}
+.element-btn-img {
+    width: 48px; height: 48px;
+    background: #000; border: 2px solid #555; border-radius: 50%;
+    cursor: pointer; padding: 0; overflow: hidden;
+    transition: transform 0.1s; box-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
+.element-btn-img:hover { transform: scale(1.2); border-color: var(--gold-bright); }
+.element-btn-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.pearl-socket {
+    position: absolute; top: -5px; right: -5px;
+    width: 20px; height: 20px; z-index: 60; pointer-events: none;
+    filter: drop-shadow(0 0 5px gold);
+}
+
+/* BOTÓN HUIR (POSICIONADO EN LA RUEDA) */
+/* Lo posicionaremos via JS o aquí relativo al wrapper si es hijo */
+.flee-btn-wrapper {
+    position: absolute;
+    /* Ajustado para estar "abajo del fuego" (Derecha, un poco abajo) */
+    top: 70%; right: -20px; 
+    z-index: 100;
+}
+#btn-flee-combat {
+    background: none; border: 1px solid #555; border-radius: 50%;
+    width: 40px; height: 40px; font-size: 1.5rem;
+    cursor: pointer; background: #000;
+}
+#btn-flee-combat:hover { border-color: red; }
+
+/* LOG FLOTANTE */
+#combat-log-container {
+    position: absolute; top: 100px; right: 20px;
+    width: 300px; height: auto; max-height: 400px;
+    background: rgba(0, 0, 0, 0.9); border: 1px solid var(--gold-ancient);
+    z-index: 300; display: none; flex-direction: column;
+}
+#combat-log-container.active { display: flex; }
+.log-header { 
+    background: var(--ink-blood); padding: 5px 10px; font-weight: bold; border-bottom: 1px solid #444; 
+    display: flex; justify-content: space-between;
+}
+.log-content { flex: 1; overflow-y: auto; padding: 10px; font-size: 0.85rem; color: #ccc; }
+
+#btn-toggle-log {
+    position: absolute; top: 20px; right: 20px;
+    font-size: 2rem; background: none; border: none; cursor: pointer; z-index: 301;
+    filter: drop-shadow(0 0 5px #000);
+}
+
+/* GOD MODE (Esquina Inferior Derecha) */
+#god-mode-toggle {
+    position: fixed; bottom: 20px; right: 20px;
+    width: 60px; height: 60px; cursor: pointer; z-index: 10000;
+    filter: drop-shadow(0 0 10px gold);
+    transition: transform 0.2s;
+}
+#god-mode-toggle:hover { transform: scale(1.1); }
+
+/* DAÑO FLOTANTE */
+.floating-damage {
+    position: absolute; font-family: var(--font-stack-title); font-size: 4rem;
+    color: #fff; text-shadow: 2px 2px 0 #000, 0 0 10px var(--ink-blood);
+    pointer-events: none; z-index: 400; animation: floatUp 1.2s forwards;
+}
+@keyframes floatUp { 0% { opacity: 1; transform: translateY(0) scale(0.5); } 20% { transform: translateY(-20px) scale(1.2); } 100% { opacity: 0; transform: translateY(-100px) scale(1); } }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (MÓVIL) - Modificaciones para pantallas pequeñas
+   ========================================================================== */
+
+@media (max-width: 768px) {
+
+    /* 1. LAYOUT GENERAL: Cambiar Sidebar lateral a Menú Inferior */
+    .game-layout {
+        flex-direction: column; /* Apilar verticalmente */
+    }
+
+    /* Transformar la barra lateral izquierda en una barra de navegación inferior */
+    .sidebar-menu {
+        width: 100% !important;
+        height: 60px;           /* Altura fija abajo */
+        position: fixed;
+        bottom: 0;
+        top: auto;              /* Ya no está arriba */
+        left: 0;
+        flex-direction: row;    /* Botones en fila horizontal */
+        border-right: none;
+        border-top: 1px solid var(--gold-ancient);
+        z-index: 5000;
+        padding-top: 0;
+        justify-content: space-around; /* Distribuir botones */
+        background: #000;
+    }
+
+    .sidebar-header { display: none; } /* Ocultar logo grande en móvil para ganar espacio */
+
+/* Ajustar los botones del menú para que sean DESLIZABLES */
+    .nav-links {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        
+        /* CAMBIO CLAVE 1: Permitir scroll horizontal */
+        overflow-x: auto; 
+        
+        /* CAMBIO CLAVE 2: Alinear al inicio, no justificar, para permitir el scroll */
+        justify-content: flex-start;
+        
+        /* Separación entre botones */
+        gap: 10px;
+        
+        /* Un poco de aire a los lados para que el primero y último no se peguen al borde */
+        padding: 0 15px; 
+        
+        /* Ocultar la barra de scroll (estética) pero permitir deslizar */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* IE */
+    }
+    
+    /* Ocultar barra de scroll en Chrome/Safari */
+    .nav-links::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-btn {
+        /* CAMBIO CLAVE 3: ¡No te encojas! Mantén tu tamaño */
+        flex: 0 0 auto; 
+        
+        font-size: 0.9rem;
+        padding: 10px 15px; /* Un poco más anchos para dedos */
+        text-align: center;
+        border: none;
+        
+        /* Opcional: Borde redondeado para que parezcan "fichas" */
+        border-radius: 4px; 
+        background: rgba(0,0,0,0.5); /* Fondo semitransparente para distinguir */
+        margin-top: 5px; /* Centrado vertical */
+    }
+
+    /* 2. CONTENIDO PRINCIPAL */
+    #main-content {
+        width: 100%;
+        margin-top: 50px;       /* Espacio para el Header superior */
+        margin-bottom: 60px;    /* Espacio para el Menú inferior */
+        height: calc(100vh - 110px); /* Restamos header y footer */
+    }
+
+    /* 3. HEADER (Barra Superior) */
+    .top-bar {
+        height: 50px;
+        padding: 0 10px;
+    }
+    .char-info h2 {
+        font-size: 0.9rem;      /* Nombre más pequeño */
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .avatar-mini { display: none; } /* Ocultar avatar mini en header (ya se ve grande en Home) */
+    .resources-wrapper { gap: 5px; font-size: 0.8rem; }
+
+    /* 4. HOGAR (Ajustes de Avatar y Barras) */
+    .meditation-container {
+        width: 180px; height: 180px; /* Reducir un poco el avatar */
+    }
+    .home-avatar { 
+        object-position: center 25%; /* Mantener el zoom al rostro */
+    }
+    .stats-grid {
+        width: 100%;
+        padding: 0 10px; /* Márgenes laterales */
+    }
+
+    /* 5. COMBATE (CRÍTICO) */
+    
+    /* El Glifo ya no puede ser 350px fijos si la pantalla mide 320px */
+    #channeling-layer {
+        width: 120vw !important;  /* 80% del ancho de la pantalla */
+        height: 120vw !important; /* Mantener proporción cuadrada */
+        max-width: 550px; 
+        max-height: 550px;
+        margin-top: -40px; /* Ajuste visual */
+    }
+    
+    /* El enemigo también se ajusta */
+    #combat-enemy-sprite img {
+        height: 30vh; /* Reducir altura del enemigo en móvil */
+        margin-top: +40px; /* Ajuste visual */
+    }
+
+    /* HUD de Combate */
+    .combat-controls-zone {
+        justify-content: flex-end; /* Empujar todo abajo */
+    }
+    
+    /* RUEDA DE ELEMENTOS (WU XING) */
+    /* Esto es delicado: Si usas coordenadas fijas en JS, necesitamos escalar todo el contenedor */
+    #wuxing-wheel-container {
+        transform: scale(0.8); /* Hacer la rueda un 20% más pequeña */
+        margin-bottom: +70px;
+        margin-top: -40px;
+    }
+
+    /* Ajuste de Barras en Combate */
+    .brush-bar-wrapper {
+        width: 95% !important; /* Que ocupen casi todo el ancho */
+    }
+
+    /* BOTÓN HUIR */
+    .flee-btn-wrapper {
+        top: 60%; right: -15px; /* Ajuste para móvil */  
+    }
+
+    /* Barras de estado del jugador */
+    .player-hud-container {
+        width: 70%;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 10px; /* Más arriba para no tapar el menú */
+        
+    }
+
+    /* LOG FLOTANTE */
+    #combat-log-container {
+        width: 90%;
+        right: 5%;
+        top: 80px;      
+        max-height: 30vh;  
+    }
+
+    /* BOTÓN LOG */
+    #btn-toggle-log {
+        top: 10px; right: 10px;
+        font-size: 1.5rem;
+        z-index: 5001;
+    }
+    
+    /* GOD MODE */
+    #god-mode-toggle {
+        width: 50px; height: 50px;
+        bottom: 80px; right: 10px; /* Más arriba para no tapar el menú */
+    }
+
+    /* DAÑO FLOTANTE */
+    .floating-damage {
+        font-size: 2.5rem;
+    }
+    /* FIN MEDIA QUERY */ 
+}

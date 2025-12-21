@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>XianXia: Ascensión Eterna</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/ui.css" />
+</head>
+<body>
+  <div id="app-root">
+    
+    <div id="auth-screen" class="fullscreen-screen">
+      <div class="stars-bg"></div>
+      <div class="auth-panel">
+        <h1 class="game-title">XianXia: Ascensión Eterna</h1>
+        <p class="game-subtitle">El Dao es infinito, tu vida es finita.</p>
+        <div class="auth-tabs">
+          <button id="tab-login" class="auth-tab active">Entrar</button>
+          <button id="tab-register" class="auth-tab">Registrarse</button>
+        </div>
+        <div id="login-form" class="auth-form active">
+          <div class="input-group"><input type="text" id="login-username" placeholder="Nombre de Daoísta" autocomplete="off" /></div>
+          <div class="input-group"><input type="password" id="login-password" placeholder="Sello Espiritual (Contraseña)" /></div>
+          <button id="login-button" class="button primary glow-effect">Iniciar Cultivación</button>
+        </div>
+        <div id="register-form" class="auth-form">
+          <div class="input-group"><input type="text" id="register-username" placeholder="Nombre de Daoísta" autocomplete="off" /></div>
+          <div class="input-group"><input type="password" id="register-password" placeholder="Crear Sello Espiritual" /></div>
+          <button id="register-button" class="button secondary">Forjar Destino</button>
+        </div>
+        <div id="auth-message" class="auth-message"></div>
+      </div>
+    </div>
+
+    <div id="creation-screen" class="fullscreen-screen hidden">
+        <div class="creation-container">
+            <h2 class="font-title title-gold">El Despertar del Alma</h2>
+            <div id="creation-step-container"></div>
+        </div>
+    </div>
+
+    <div id="game-container" class="game-layout hidden">
+        
+        <nav id="game-nav" class="sidebar-menu">
+            <div class="sidebar-header">
+                <div class="app-logo font-title">Ascensión</div>
+            </div>
+            <div class="nav-links">
+                <button class="nav-btn active" data-target="panel-home">
+                    <span class="nav-icon">🏠</span> <span class="nav-label">Hogar</span>
+                </button>
+                <button class="nav-btn" data-target="panel-skills">
+                    <span class="nav-icon">🔥</span> <span class="nav-label">Habilidades</span>
+                </button>
+                <button class="nav-btn" data-target="panel-inventory">
+                    <span class="nav-icon">🎒</span> <span class="nav-label">Bolsa</span>
+                </button>
+                <button class="nav-btn" data-target="panel-combat">
+                    <span class="nav-icon">⚔️</span> <span class="nav-label">Combate</span>
+                </button>
+                <button class="nav-btn" data-target="panel-map">
+                    <span class="nav-icon">🗺️</span> <span class="nav-label">Mundo</span>
+                </button>
+                <button class="nav-btn" data-target="panel-sect">
+                    <span class="nav-icon">🏯</span> <span class="nav-label">Secta</span>
+                </button>
+            </div>
+            <div class="nav-footer">
+                <button id="logout-button" class="nav-btn danger">
+                    <span class="nav-icon">🚪</span> <span class="nav-label">Salir</span>
+                </button>
+            </div>
+        </nav>
+
+        <main id="main-content">
+
+            <div id="panels-container">
+                
+                <section id="panel-home" class="tab-content active">
+                    <div class="hero-card">
+                        <div class="meditation-visual">🧘</div>
+                        <h2 class="font-title">Tu Morada Espiritual</h2>
+                        <div class="bars-wrapper">
+                            <div class="stat-bar">
+                                <div class="bar-label">Salud <span id="val-hp">100/100</span></div>
+                                <div class="progress-track"><div id="bar-hp" class="progress-fill hp" style="width:100%"></div></div>
+                            </div>
+                            <div class="stat-bar">
+                                <div class="bar-label">Qi (Exp) <span id="val-qi">0/100</span></div>
+                                <div class="progress-track"><div id="bar-qi" class="progress-fill qi" style="width:0%"></div></div>
+                            </div>
+                            <div class="stat-bar">
+                                <div class="bar-label">Esencia <span id="val-essence">50/50</span></div>
+                                <div class="progress-track"><div id="bar-essence" class="progress-fill essence" style="width:100%"></div></div>
+                            </div>
+                        </div>
+                        <div class="stats-container" style="display: block; text-align: center;">
+                            <div class="stat-row">
+                                <span class="stat-label">Nivel:</span> <span id="stat-level" class="stat-value">1</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Ataque:</span> <span id="stat-attack" class="stat-value">10</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Defensa:</span> <span id="stat-defense" class="stat-value">5</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Oro:</span> <span id="stat-gold" class="stat-value">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Piedras Espirituales:</span> <span id="stat-spiritStones" class="stat-value">0</span>
+                            </div>
+                        </div>
+                        <button id="btn-meditate" class="action-button primary">Concentrar Qi</button>
+                        
+                        <div class="log-card collapsible" style="text-align: center;">
+                            <div class="card-header font-title collapsible-header" onclick="toggleLog()">Flujo de Qi (Actividad) <span class="toggle-icon">▼</span></div>
+                            <div id="log-messages" class="log-body custom-scroll collapsible-content" style="display: block;"></div>
+                        </div>
+                    </div>
+                    
+                </section>
+
+                <section id="panel-skills" class="tab-content hidden">
+                    <h2 class="section-title font-title">Maestrías y Técnicas</h2>
+                    <div id="skills-grid" class="skills-layout custom-scroll">
+                        </div>
+                </section>
+
+                <section id="panel-inventory" class="tab-content hidden">
+                    <h2 class="section-title font-title">Bolsa Espiritual</h2>
+                    <div id="inventory-slots" class="grid-layout custom-scroll"></div>
+                </section>
+
+                <section id="panel-combat" class="tab-content hidden">
+                    <div id="enemy-list" class="zone-selector-container">
+                        <h2 class="font-title section-title">Zona: <span id="current-region-name">Bosque</span></h2>
+                        <div class="grid-layout custom-scroll" id="enemy-grid-content">
+                            </div>
+                    </div>
+
+                    <div id="battle-arena" class="combat-grid hidden">
+                        
+                        <div class="combat-top-hud">
+                            <div class="enemy-portrait-frame">
+                                <div class="intention-bubble" id="enemy-intention-icon">⚔️</div>
+                                <div id="combat-enemy-sprite" class="sprite-enemy">🐺</div>
+                            </div>
+                            <div class="bars-column">
+                                <div class="bar-label">Enemigo HP</div>
+                                <div class="progress-track enemy"><div id="e-bar-hp" class="progress-fill hp" style="width:100%"></div></div>
+                                <div class="bar-label">Postura</div>
+                                <div class="progress-track posture"><div class="progress-fill posture" style="width:10%"></div></div>
+                            </div>
+                        </div>
+
+                        <div class="combat-middle-field">
+                            <div class="player-avatar-combat">
+                                <div id="combat-player-sprite" class="sprite-player">👤</div>
+                                <div class="progress-track mini"><div id="p-bar-hp" class="progress-fill hp" style="width:100%"></div></div>
+                            </div>
+                            
+                            <div id="combat-message-overlay" style="position:absolute; width:100%; height:100%; pointer-events:none;"></div>
+
+                            <div class="combat-log-display custom-scroll" id="combat-log-feed">
+                                </div>
+                        </div>
+
+                        <div class="combat-bottom-controls" id="combat-actions">
+                            <div class="wuxing-wrapper">
+                                <div id="wuxing-wheel" class="elemental-wheel">
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="panel-map" class="tab-content hidden">
+                    <h2 class="section-title font-title">Mapa del Reino</h2>
+                    <div id="map-panel" class="map-container"></div>
+                </section>
+
+                <section id="panel-sect" class="tab-content hidden">
+                    <h2 class="section-title font-title">Pabellón de la Secta</h2>
+                    <div id="sect-content" class="sect-container">
+                        </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <div id="ui-overlay" class="overlay hidden"></div>
+  </div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

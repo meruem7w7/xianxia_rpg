@@ -103,3 +103,412 @@ ul li {
   margin-bottom: 4px;
   font-size: 0.85rem;
 }
+
+/* --- UI CULTIVO --- */
+.cultivation-dashboard {
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+    color: #eee;
+}
+
+.eso-stats-row {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-family: monospace;
+}
+
+.cultivation-layout {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Biblioteca de Skills (Izquierda) */
+.library-container {
+    flex: 1;
+    min-width: 200px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #555;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+.library-container h3, .wheel-wrapper h3 {
+    text-align: center;
+    background: #333;
+    margin: 0;
+    padding: 5px;
+    font-size: 0.9rem;
+    color: #d4af37;
+}
+
+.skills-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 5px;
+}
+
+.skill-library-item {
+    display: flex;
+    align-items: center;
+    background: #222;
+    margin-bottom: 5px;
+    padding: 5px;
+    border: 1px solid #444;
+    cursor: grab;
+    transition: background 0.2s;
+}
+.skill-library-item:hover { background: #333; }
+.skill-library-item:active { cursor: grabbing; }
+
+.lib-icon { font-size: 1.5rem; margin-right: 10px; }
+.lib-name { font-size: 0.9rem; font-weight: bold; }
+.lib-elem { font-size: 0.7rem; text-transform: uppercase; }
+.type-fire { color: #ff6b6b; }
+.type-water { color: #4dabf7; }
+.type-wood { color: #69db7c; }
+.type-metal { color: #adb5bd; }
+.type-earth { color: #ffd43b; }
+
+/* Rueda Pentagonal (Derecha) */
+.wheel-wrapper {
+    flex: 1.5;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#cultivation-wheel-container {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    margin-top: 20px;
+    /* Imagen de fondo opcional para conectar las líneas */
+    background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, rgba(0,0,0,0) 70%);
+    border-radius: 50%;
+    border: 1px dashed #444;
+}
+
+.cultivation-slot {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    border-radius: 50%;
+    background: #1a1a1a;
+    border: 2px solid #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    transition: transform 0.2s;
+}
+.cultivation-slot:hover { transform: scale(1.1); border-color: #fff; }
+
+.slot-bg-icon {
+    width: 30px; 
+    height: 30px; 
+    opacity: 0.3; 
+    pointer-events: none;
+}
+
+/* Posiciones Pentagonales (Top, Right, Bottom-Right, Bottom-Left, Left) */
+/* Ajustado para un contenedor de 300x300 */
+.slot-fire { top: 10px; left: 50%; transform: translateX(-50%); border-color: #e74c3c; } /* Arriba */
+.slot-earth { top: 90px; right: 10px; border-color: #f1c40f; } /* Derecha */
+.slot-metal { bottom: 40px; right: 40px; border-color: #bdc3c7; } /* Abajo Derecha */
+.slot-water { bottom: 40px; left: 40px; border-color: #3498db; } /* Abajo Izquierda */
+.slot-wood { top: 90px; left: 10px; border-color: #2ecc71; } /* Izquierda */
+
+/* Fichas Equipadas */
+.equipped-skill-token {
+    position: absolute;
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 1.5rem;
+    background: #222;
+    z-index: 2;
+}
+
+/* Bordes de Afinidad */
+.affinity-harmony { 
+    border: 3px solid #ffd700; 
+    box-shadow: 0 0 15px #ffd700, inset 0 0 10px #ffd700; 
+}
+.affinity-generation { 
+    border: 3px solid #4caf50; 
+    box-shadow: 0 0 10px #4caf50; 
+}
+.affinity-dissonance { 
+    border: 3px solid #555; 
+    filter: grayscale(100%);
+    opacity: 0.8;
+}
+
+.affinity-legend {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    display: flex;
+    gap: 15px;
+}
+
+/* --- ANATOMÍA SAGRADA (Diseño Silueta V2) --- */
+
+/* Contenedor Principal Bipartito */
+.anatomy-layout {
+    display: flex;
+    gap: 20px;
+    height: 100%;
+    min-height: 500px; /* Altura mínima para que quepa la silueta */
+}
+
+/* --- COLUMNA IZQUIERDA: CONTROLES --- */
+.anatomy-controls {
+    flex: 1; /* Ocupa el 40-50% */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #444;
+}
+
+.anatomy-section-title {
+    font-family: 'Cinzel', serif;
+    color: #d4af37;
+    border-bottom: 1px solid #555;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+/* Botones de Mejora */
+.upgrade-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+.upgrade-info { font-size: 0.8rem; color: #ccc; }
+.btn-upgrade {
+    padding: 4px 10px;
+    font-size: 0.7rem;
+    border: 1px solid #d4af37;
+    background: transparent;
+    color: #d4af37;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.btn-upgrade:hover { background: #d4af37; color: #000; }
+
+/* Capas Toggles (Botones para ver/ocultar) */
+.layers-control {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: auto; /* Empujar al fondo */
+    padding-top: 10px;
+    border-top: 1px solid #444;
+}
+.layer-btn {
+    background: #222; border: 1px solid #555; color: #777;
+    width: 30px; height: 30px; border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+}
+.layer-btn.active { border-color: #00ffff; color: #00ffff; box-shadow: 0 0 5px #00ffff; }
+
+/* --- COLUMNA DERECHA: VISUALIZACIÓN --- */
+.anatomy-visualizer {
+    flex: 1.2; /* Un poco más ancho */
+    position: relative;
+    background: radial-gradient(circle, rgba(20,20,20,1) 0%, rgba(0,0,0,1) 80%);
+    border: 2px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* El Contenedor de la Silueta (Apilamiento) */
+.silhouette-container {
+    position: relative;
+    width: 300px; /* Ajusta al ancho de tus PNGs */
+    height: 500px; /* Ajusta al alto de tus PNGs */
+}
+
+/* Grid de botones de capas */
+.layers-grid {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Ajustes Visuales */
+.silhouette-container {
+    position: relative;
+    width: 300px; 
+    height: 500px;
+    /* Centrar contenido */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.body-layer {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: contain;
+    transition: opacity 0.4s ease, filter 0.4s ease;
+    pointer-events: none;
+}
+
+/* Estado Oculto */
+.layer-hidden {
+    opacity: 0 !important;
+}
+
+/* */
+
+/* Músculos: Base Blanca teñida a Rojo Sangre */
+#layer-muscles {
+    opacity: 1; /* Sólido, nada de rayos X */
+    
+    /* FILTRO DE TEÑIDO: 
+       Sepia(1) -> Convierte blanco/negro en sepia (marrón).
+       Saturate(3) -> Intensifica el color.
+       Hue-rotate(-50deg) -> Mueve el tono hacia el rojo/rosado.
+    */
+    filter: sepia(1) saturate(2.8) hue-rotate(-50deg) contrast(1.1);
+    
+    /* mix-blend-mode: multiply;  <-- DESACTIVADO
+       Si la silueta base es negra, 'multiply' haría desaparecer los músculos.
+       Usamos 'normal' para que se vean sobre la silueta negra. 
+    */
+    mix-blend-mode: normal; 
+}
+
+/* --- ANIMACIONES DE DANTIANS --- */
+
+/* 1. Dantian Inferior (Vórtice): Giro constante */
+@keyframes spin-slow {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.anim-spin {
+    animation: spin-slow 10s linear infinite;
+}
+
+/* 2. Dantian Medio (Corazón): Pulso vital */
+@keyframes pulse-heart {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+    50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+}
+
+.anim-pulse {
+    animation: pulse-heart 3s infinite ease-in-out;
+}
+
+/* 3. Dantian Superior (Mente): Levitación mística */
+@keyframes levitate-mind {
+    0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+    50% { transform: translate(-50%, -50%) translateY(-6px); }
+}
+
+.anim-float {
+    animation: levitate-mind 4s infinite ease-in-out;
+}
+
+/* ESTILOS DE LOS NUEVOS ASSETS */
+.dantian-img {
+    position: absolute;
+    left: 50%; /* Centrado horizontal */
+    width: 60px; /* Ajusta según el tamaño de tus PNG */
+    height: 60px;
+    object-fit: contain;
+    z-index: 20; /* Encima de todo */
+    pointer-events: none; /* Dejar pasar clic a capas inferiores si es necesario */
+}
+
+/* Ajuste de posiciones verticales para encajar en la silueta */
+.pos-mind { top: 11%; width: 50px; height: 50px; }
+.pos-chest { top: 28%; width: 70px; height: 70px; }
+.pos-abdomen { top: 46%; width: 65px; height: 65px; }
+
+/* Capa Nebulosa */
+#layer-nebula {
+    opacity: 0.8;
+    mix-blend-mode: screen; /* Para que brille sobre lo negro */
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
+}
+
+/* Icono de Rango de Raíz (En el panel de control) */
+.rank-icon-display {
+    width: 40px; 
+    height: 40px; 
+    vertical-align: middle; 
+    margin-right: 10px;
+    filter: drop-shadow(0 0 5px gold);
+}
+
+/* - AÑADIR O REEMPLAZAR */
+
+/* Clase mágica para recortar con la forma del cuerpo */
+.masked-layer {
+    /* Usa la variable definida en el HTML inline */
+    -webkit-mask-image: var(--body-mask);
+    mask-image: var(--body-mask);
+    
+    /* Ajustes para que la máscara cubra todo */
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+/* Efecto de Profundidad (Volumen) */
+.body-inner-shadow {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    
+    /* Sombra interna negra fuerte en los bordes */
+    box-shadow: inset 0 0 20px 5px rgba(0,0,0,0.9);
+    
+    z-index: 15; /* Encima de nebulosa y redes, debajo de dantians */
+    pointer-events: none;
+}
+
+/* Ajuste Nebulosa para que parezca "Líquido Interior" */
+#layer-nebula {
+    opacity: 0.9;
+    /* Screen o Overlay funcionan bien para integrar con negro */
+    mix-blend-mode: screen; 
+    /* Un poco de blur ayuda a que parezca gas */
+    filter: blur(0.5px) contrast(1.2);
+}
+
+/* Ajuste Raíz Espiritual */
+#layer-spiritroot {
+    /* La raíz brilla más si está "dentro" */
+    mix-blend-mode: screen; 
+    z-index: 5;
+}

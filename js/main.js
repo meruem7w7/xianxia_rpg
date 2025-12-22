@@ -14,7 +14,7 @@ import { renderSkills } from './skills.js';
 import { showMap } from './map.js';
 import { showSectOptions } from './sects.js';
 import { registerUser, loginUser, logoutUser, getCurrentSession } from './persistence.js';
-import { showMessage, toggleLog } from './ui.js';
+import { showMessage, toggleLog, UI } from './ui.js';
 import { startCombat, updateCombatBars } from './combat.js'; 
 import { ZONES, ENEMIES_DB } from './data.js';
 import { initGodMode } from './godmode.js';
@@ -73,6 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if(targetId === 'panel-map') showMap();
         if(targetId === 'panel-sect') showSectOptions();
         if(targetId === 'panel-combat') renderCombatList();
+        if(targetId === 'panel-cultivation') UI.renderCultivationPanel();
+        if(targetId === 'panel-anatomy') renderAnatomyPanel();
     }
 
 // En js/main.js
@@ -205,6 +207,12 @@ function renderHomePanel() {
         if(!document.getElementById('battle-arena').classList.contains('hidden')) {
             updateCombatBars();
         }
+        if(!document.getElementById('panel-cultivation').classList.contains('hidden')) {
+            UI.renderCultivationPanel();
+        }
+        if(!document.getElementById('panel-anatomy').classList.contains('hidden')) {
+            renderAnatomyPanel();
+        }
     };
 
     // --- INITIALIZATION ---
@@ -268,4 +276,146 @@ function renderHomePanel() {
     }
 });
 
+// --- PANEL ANATOMÍA SAGRADA ---
+
+function renderAnatomyPanel() {
+    if(!character) return;
+    
+    const container = document.getElementById('anatomy-content');
+    if(!container) return;
+
+    // 1. DETECTAR GÉNERO Y CONFIGURAR RUTAS
+    // Si no tiene género definido (partida vieja), asumimos "man"
+    const gender = character.gender || "man"; 
+    const suffix = (gender === "woman") ? "women" : "man"; // _men o _women
+
+    const ASSETS_ANATOMY = {
+        base: `assets/img/anatomy/silhouette_base_${gender === "woman" ? "woman" : "man"}.png`,
+        meridians: `assets/img/anatomy/meridians_overlay_${suffix}.png`,
+        bones: `assets/img/anatomy/bones_overlay_${suffix}.png`,
+        muscles: `assets/img/anatomy/muscle_overlay_${suffix}.png`,
+        spiritroot: `assets/img/anatomy/spiritroot_overlay_${suffix}.png`
+    };
+
+    const rootInfo = character.root || { type: "pseudo" };
+    const anatomy = character.anatomy || {
+        dantian_upper: { soul_force: 0 },
+        dantian_middle: { purity: 0 },
+        dantian_lower: { current: 0, max: 100 }
+    };
+    
+    // Nombres legibles
+    const ROOT_NAMES = {
+        "pseudo": "Raíz Pseudo-Espiritual",
+        "true": "Raíz Verdadera",
+        "heavenly": "Raíz Celestial",
+        "mutant": "Raíz Mutante"
+    };
+
+    // --- LÓGICA DE TEÑIDO (TINTA) PARA LA RAÍZ ESPIRITUAL ---
+    // Usamos filtros CSS para colorear lo blanco (sistema nervioso)
+    // El elemento principal de la raíz define el color.
+    const mainElement = rootInfo.elements && rootInfo.elements.length > 0 ? rootInfo.elements[0] : "metal";
+    
+    const ROOT_FILTERS = {
+        fire: "sepia(1) saturate(5) hue-rotate(-50deg)",   // Rojo
+        water: "sepia(1) saturate(5) hue-rotate(180deg)",  // Azul
+        wood: "sepia(1) saturate(5) hue-rotate(50deg)",    // Verde
+        earth: "sepia(1) saturate(3) hue-rotate(-100deg)", // Marrón/Oro
+        metal: "grayscale(1) brightness(1.5)",             // Plata/Blanco brillante
+        ice: "sepia(1) saturate(3) hue-rotate(150deg)",    // Cian Pálido (Mutante)
+        lightning: "sepia(1) saturate(5) hue-rotate(220deg) brightness(1.5)" // Violeta (Mutante)
+    };
+    
+    // Si la raíz es "pseudo" (mezcla sucia), la dejamos grisácea o default
+    const currentFilter = (rootInfo.type === 'pseudo') ? "sepia(0.5) saturate(0.5)" : (ROOT_FILTERS[mainElement] || "none");
+
+    // --- HTML DEL PANEL ---
+    container.innerHTML = `
+        <div class="anatomy-layout">
+            
+            <div class="anatomy-controls custom-scroll">
+                <div>
+                    <h3 class="font-title text-gold">${character.name}</h3>
+                    <div class="cultivation-rank" style="text-align:left;">${ROOT_NAMES[rootInfo.type]}</div>
+                    <div style="font-size:0.8rem; color:#888; margin-bottom:10px;">
+                        Cuerpo: ${gender === "woman" ? "Yin (Femenino)" : "Yang (Masculino)"}<br>
+                        Afinidad Principal: <span style="text-transform:capitalize; color:#eee;">${mainElement}</span>
+                    </div>
+                </div>
+
+                <div style="background:rgba(0,0,0,0.5); padding:10px; border-radius:5px; margin-bottom:15px;">
+                    <div class="anatomy-section-title">Capas de Percepción</div>
+                    <div class="layers-grid">
+                        <button class="layer-btn active" onclick="toggleLayer('base', this)" title="Silueta Base">👤</button>
+                        <button class="layer-btn active" onclick="toggleLayer('spiritroot', this)" title="Raíz Espiritual (Nervios)">🌿</button>
+                        <button class="layer-btn" onclick="toggleLayer('meridians', this)" title="Meridianos">⚡</button>
+                        <button class="layer-btn" onclick="toggleLayer('muscles', this)" title="Músculos">💪</button>
+                        <button class="layer-btn" onclick="toggleLayer('bones', this)" title="Huesos">💀</button>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="anatomy-section-title">Centros de Poder</div>
+                    <div class="upgrade-row">
+                        <div class="upgrade-info">
+                            <span style="color:#00ffff">Mar Conciencia</span><br>
+                            <small>Fuerza: ${anatomy.dantian_upper.soul_force}</small>
+                        </div>
+                        <button class="btn-upgrade" onclick="showMessage('Requiere técnica mental.', 'alerta')">Refinar</button>
+                    </div>
+                    <div class="upgrade-row">
+                        <div class="upgrade-info">
+                            <span style="color:#ff0055">Palacio Carmesí</span><br>
+                            <small>Pureza: ${anatomy.dantian_middle.purity}%</small>
+                        </div>
+                        <button class="btn-upgrade" onclick="showMessage('Requiere píldoras de sangre.', 'alerta')">Templar</button>
+                    </div>
+                    <div class="upgrade-row">
+                        <div class="upgrade-info">
+                            <span style="color:#ffd700">Mar de Qi</span><br>
+                            <small>${Math.floor(anatomy.dantian_lower.current)}/${anatomy.dantian_lower.max} Qi</small>
+                        </div>
+                        <button class="btn-upgrade" onclick="window.meditate(); window.forceUpdateAll();">Cultivar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="anatomy-visualizer">
+                <div class="silhouette-container">
+                    <img id="layer-base" src="${ASSETS_ANATOMY.base}" class="body-layer">
+                    
+                    <img id="layer-bones" src="${ASSETS_ANATOMY.bones}" class="body-layer layer-hidden">
+                    
+                    <img id="layer-muscles" src="${ASSETS_ANATOMY.muscles}" class="body-layer layer-hidden">
+                    
+                    <img id="layer-spiritroot" src="${ASSETS_ANATOMY.spiritroot}" class="body-layer" 
+                         style="filter: ${currentFilter}; mix-blend-mode: screen;">
+                    
+                    <img id="layer-meridians" src="${ASSETS_ANATOMY.meridians}" class="body-layer layer-hidden"
+                         style="filter: drop-shadow(0 0 2px cyan);">
+                    
+                    <div class="dantian-node node-upper" title="Dantian Superior"></div>
+                    <div class="dantian-node node-middle" title="Dantian Medio"></div>
+                    <div class="dantian-node node-lower" title="Dantian Inferior"></div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// --- FUNCIÓN HELPER PARA LOS BOTONES DE CAPAS ---
+// Añade esto fuera de renderAnatomyPanel, pero accesible globalmente o en window
+window.toggleLayer = function(layerId, btnElement) {
+    const img = document.getElementById(`layer-${layerId}`);
+    if (img) {
+        if (img.classList.contains('layer-hidden')) {
+            img.classList.remove('layer-hidden');
+            btnElement.classList.add('active');
+        } else {
+            img.classList.add('layer-hidden');
+            btnElement.classList.remove('active');
+        }
+    }
+};
 window.toggleLog = toggleLog;

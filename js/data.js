@@ -86,5 +86,24 @@ export const ZONES = {
     }
 };
 
+// --- AÑADIR AL FINAL DE js/data.js ---
+
+// 7. TIPOS DE RAÍCES ESPIRITUALES (Fundamento)
+export const ROOT_TYPES = {
+    PSEUDO: { id: "pseudo", name: "Raíz Pseudo-Espiritual", xp_mult: 0.5, desc: "Impura. 4-5 Elementos." },
+    TRUE: { id: "true", name: "Raíz Verdadera", xp_mult: 1.0, desc: "Equilibrada. 2-3 Elementos." },
+    HEAVENLY: { id: "heavenly", name: "Raíz Celestial", xp_mult: 2.5, desc: "Pura. 1 Elemento." },
+    MUTANT: { id: "mutant", name: "Raíz Mutante", xp_mult: 2.0, desc: "Rayo/Hielo/Viento." }
+};
+
+// 8. REINOS DE CULTIVO (Niveles Mayores)
+export const REALMS = {
+    1: "Condensación de Qi",
+    2: "Establecimiento de Fundación",
+    3: "Formación del Núcleo",
+    4: "Alma Naciente",
+    5: "Transformación de Deidad"
+};
+
 export const npcData = {};
 export const questData = {};

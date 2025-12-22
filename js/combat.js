@@ -449,7 +449,7 @@ function performEnemyUltimate() {
     // Consumir esencia del enemigo
     combatState.enemy.essence = Math.max(0, combatState.enemy.essence - enemyQiCost);
 
-    // Calcular daño masivo (Ej: Ataque x 4)
+    // Calcular daño masivo (Ej: Ataque x 4.2)
     const dmg = Math.floor(combatState.enemy.stats.attack * 4.2);
     
     // Aplicar daño

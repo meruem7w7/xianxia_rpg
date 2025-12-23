@@ -86,8 +86,6 @@ export const ZONES = {
     }
 };
 
-// --- AÑADIR AL FINAL DE js/data.js ---
-
 // 7. TIPOS DE RAÍCES ESPIRITUALES (Fundamento)
 export const ROOT_TYPES = {
     PSEUDO: { id: "pseudo", name: "Raíz Pseudo-Espiritual", xp_mult: 0.5, desc: "Impura. 4-5 Elementos." },

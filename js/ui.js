@@ -1,7 +1,16 @@
 /**
  * Archivo: ui.js
- * Propósito: Maneja la interfaz de usuario, incluyendo log, overlays y 
+ * Propósito: Maneja la interfaz de usuario, incluyendo log, overlays y
  * el sistema de gestión de cultivo (Wu Xing Drag & Drop).
+ *
+ * Comentarios detallados:
+ * - Assets: Los iconos de elementos están ubicados en assets/icons/elements/element_${elem}.png (ej: element_fire.png).
+ *   Tamaños: .slot-bg-icon en ui.css define width: 30px; height: 30px; para iconos de fondo de slots.
+ *   .equipped-skill-token usa font-size: 1.5rem; para el icono de skill equipada, sin tamaño fijo de imagen.
+ * - Cambios: Sistema Wu Xing agregado con drag & drop. Slots pentagonales renderizados dinámicamente.
+ *   handleDrop calcula afinidad basada en ciclo elemental (harmony si mismo elemento, generation si padre-hijo).
+ * - UI.renderCultivationPanel: Renderiza slots con posiciones fijas en CSS (.slot-fire, .slot-water, etc.).
+ *   Cada slot tiene dataset.element para identificar el elemento Wu Xing.
  */
 
 import { character, equipSkill, unequipSkill } from "./character.js";
@@ -110,6 +119,8 @@ export const UI = {
             slot.ondrop = (e) => UI.handleDrop(e);
 
             // Icono de fondo del elemento (Visual)
+            // Asset: assets/icons/elements/element_${elem}.png (ej: element_metal.png)
+            // Tamaño: Controlado por CSS .slot-bg-icon (30px x 30px)
             const bgIcon = document.createElement('img');
             bgIcon.src = `assets/icons/elements/element_${elem}.png`;
             bgIcon.className = 'slot-bg-icon';
@@ -127,6 +138,7 @@ export const UI = {
                     skillImg.className = `equipped-skill-token affinity-${equipped.affinity}`;
                     skillImg.innerHTML = skill.icon || "📜";
                     skillImg.title = `${skill.name} (${equipped.affinity})`;
+                    // Tamaño: Controlado por CSS .equipped-skill-token (ancho/alto 100% del slot, font-size 1.5rem)
                     // --- NUEVO: DESEQUIPAR CON CLIC DERECHO ---
                     skillImg.oncontextmenu = (e) => {
                         e.preventDefault(); // Evita que salga el menú del navegador

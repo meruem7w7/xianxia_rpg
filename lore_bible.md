@@ -73,10 +73,12 @@ El juego sigue una narrativa emergente: tus elecciones (como elegir una secta o 
 
 ---
 
+---
+
 ## 4. Mecánicas de Cultivación
 ### Progreso del Personaje
 - **Niveles**: Se suben acumulando experiencia (Qi). Cada nivel aumenta salud, ataque y esencia máxima.
-- **Meditación**: Acción principal en el panel "Hogar" para ganar Qi y Oro.
+- **Meditación**: Acción principal en el panel "Hogar" para ganar Qi y Oro. Ahora incluye cultivo avanzado de los Dantians.
 - **Habilidades**: Técnicas elementales aprendidas en el panel "Habilidades". Incluyen oficios pasivos y técnicas activas:
   - **Oficios**: Meditación (aumenta Qi pasiva), Alquimia (píldoras), Forja (armas), Herbolaria (plantas), Minería (minerales).
   - **Técnicas de Combate**:
@@ -88,11 +90,22 @@ El juego sigue una narrativa emergente: tus elecciones (como elegir una secta o 
     - **Golpe Marcial** (Físico): Ataque básico sin costo.
 - **Equipamiento**: Armas y armaduras que boostean ataque y defensa.
 
+### Sistema de Cultivo Wu Xing
+El **Pentágono Wu Xing** es el corazón de la cultivación elemental. Los cultivadores vinculan técnicas a meridianos elementales (Metal, Madera, Agua, Fuego, Tierra) para formar un ciclo de poder.
+
+- **Equipar Técnicas**: Arrastra habilidades aprendidas a slots en el pentágono. Cada slot representa un meridiano.
+- **Afinidades**:
+  - **Armonía**: Técnica y slot del mismo elemento (ej: Fuego en Fuego). Bonus máximo de daño y eficiencia.
+  - **Generación**: Ciclo de creación (ej: Madera en Fuego). Bonus moderado, regeneración adicional.
+  - **Disonancia**: Ciclo de destrucción (ej: Fuego en Agua). Penalización, pero permite crecimiento espiritual al superar debilidades.
+- **Efectos**: Las afinidades afectan el daño, costo de Qi y bonuses pasivos. Un pentágono equilibrado acelera la ascensión.
+
 ### Combate Elemental
 - **Sistema Wu Xing**: Los elementos tienen ventajas/desventajas. Fuego vence a Madera, Madera a Tierra, etc.
 - **Resonancia**: Combinar elementos para ataques poderosos.
-- **Channeling**: Canalizar esencia para potenciar habilidades, con glifos visuales coloreados por elemento.
+- **Channeling**: Canalizar esencia para potenciar habilidades, con glifos visuales coloreados por elemento. Puede ser interrumpido, causando aturdimiento.
 - **Turnos**: Jugador vs. Enemigo, con opciones de ataque, defensa o canalización.
+- **Anatomía en Combate**: Meridians bloqueados reducen la efectividad de skills. El Dantian Superior boostea percepción y poder de alma para supresión mental.
 - **HUDs**: Barras de HP y Esencia para ambos, con sprites y efectos visuales.
 
 ### Economía
@@ -101,7 +114,96 @@ El juego sigue una narrativa emergente: tus elecciones (como elegir una secta o 
 
 ---
 
-## 5. Sectas y Facciones
+## 5. Anatomía Sagrada y Dantians
+La **Anatomía Sagrada** representa el cuerpo espiritual del cultivador, dividido en capas visuales y centros de poder llamados **Dantians**. Estos son nodos de energía que se cultivan para trascender límites físicos y espirituales.
+
+### Capas de la Anatomía
+- **Base**: La silueta corporal fundamental.
+- **Meridianos**: Canales de Qi que conectan los Dantians. Si están bloqueados, fallan las técnicas.
+- **Huesos**: Estructura espiritual, simbolizando estabilidad.
+- **Músculos**: Fuerza física, teñida por la raíz elemental.
+- **Raíz Espiritual**: Origen del poder innato, visible como raíces etéreas.
+- **Nebulosa**: Capa de energía cósmica que rodea el cuerpo, influida por el Dao.
+
+### Los Tres Dantians
+- **Dantian Inferior (Mar de Qi)**: Ubicado en el abdomen. Almacena Qi puro. Se cultiva mediante meditación para aumentar capacidad y regeneración. Vinculado a la esencia espiritual.
+- **Dantian Medio (Palacio Carmesí)**: En el pecho. Controla el vigor corporal y pureza. Capas de refinamiento aumentan resistencia y armonía elemental.
+- **Dantian Superior (Mar Conciencia)**: En la mente. Centro de percepción y poder de alma. Boostea detección de amenazas y supresión mental en combates. Crítico para combate espiritual.
+
+Cultivar los Dantians requiere meditación dedicada y alineación con el Dao. Un desequilibrio puede causar bloqueos en meridianos o impurezas.
+
+---
+
+## 6. Fundamento Espiritual (Raíz)
+El **Fundamento** es la base innata del poder de un cultivador, determinado al despertar. Define afinidades elementales y potencial de crecimiento.
+
+- **Tipos de Raíz**:
+  - **Pseudo-Espiritual**: La más común y débil. Elementos impuros, crecimiento lento. Representa mortales sin talento innato.
+  - **Espiritual**: Afinidades claras, permite variantes elementales (ej: Lightning para Fuego, Ice para Agua). Ideal para cultivadores balanceados.
+  - **Variantes Especiales**: Elementos fusionados como Rayo o Hielo, otorgando habilidades únicas pero con riesgos de inestabilidad.
+- **Elementos Impuros**: En raíces débiles, elementos mixtos diluyen el poder. La purificación a través de quests y meditación mejora la raíz.
+- **Influencia**: La raíz tiñe visualmente la anatomía y afecta afinidades en Wu Xing. Un fundamento fuerte acelera la ascensión, pero uno débil requiere perseverancia.
+
+---
+
+## 7. Intenciones y Estados Espirituales
+Las **Intenciones** son estados mentales permanentes que otorgan buffs basados en logros y acciones.
+
+- **Puntos de Matanza**: Acumulados al derrotar enemigos. Desbloquean intenciones como "Slaughter" (aumento de daño, reducción de empatía).
+- **Intenciones Activas**:
+  - **Slaughter**: Bonus de daño físico y robo de vida, pero reduce regeneración espiritual.
+  - **Ethereal**: Aumento de evasión y percepción, ideal para exploración.
+  - **Dao Harmony**: Equilibrio perfecto, bonuses en todos los aspectos pero difícil de mantener.
+- **Karma y Consecuencias**: Acciones influyen en el karma, afectando drops, eventos narrativos y finales alternativos. Un karma negativo atrae enemigos oscuros, mientras uno positivo abre secretos del Dao.
+
+---
+
+## 8. Sectas y Facciones
+Las sectas son alianzas de cultivadores con filosofías únicas, basadas en el equilibrio elemental.
+
+- **Secta Montaña Etérea**: Maestros del flujo de Qi natural y la curación. Bonus: +10% Regeneración de Salud. Ubicada en las Montañas Etéreas.
+- **Secta Puño Atronador**: Cultivadores corporales que rompen rocas con los puños. Bonus: +5% Daño Físico. En las Tierras Altas.
+
+Unirte a una secta otorga beneficios como quests exclusivas y aliados.
+
+---
+
+## 9. Regiones y Lugares
+- **Bosque Mortal**: Zona de caza para novatos, llena de conejos y lobos espirituales.
+- **Montañas Volcánicas**: Territorio de fuego, con cuevas de lava.
+- **Tierras Altas**: Regiones de tierra, con ruinas antiguas.
+- **Costas Místicas**: Áreas de agua, con templos sumergidos.
+- **Forjas Celestiales**: Lugares de metal, con herrerías espirituales.
+
+Cada región tiene enemigos únicos y recursos específicos.
+
+---
+
+## 10. Enemigos y Criaturas
+- **Lobo Espiritual**: Bestia de Madera, agresiva y territorial. HP: 200, Ataque: 12, Defensa: 5. Dropea Piel de Lobo.
+- **Conejo Lunar**: Criatura débil de Madera, ideal para novatos. HP: 30, Ataque: 4, Defensa: 0. Sin drops.
+- **Bestias Espirituales**: Lobos de Qi, Dragones de Fuego, etc. Basados en elementos.
+- **Cultivadores Renegados**: Humanos que han caído en la oscuridad, usando esencia robada.
+- **Guardianes Antiguos**: Entidades poderosas que protegen secretos del Dao.
+
+---
+
+## 11. Items y Artefactos
+- **Armas**: Espada Oxidada (+2 Ataque), Espada de Hierro (+5 Ataque).
+- **Consumibles**: Píldora Menor (recupera 20 HP).
+- **Materiales**: Piel de Lobo, Mineral de Hierro, Madera Ancestral.
+- **Moneda**: Piedra Espiritual (usada para compras avanzadas).
+- **Artefactos Legendarios**: Objetos que alteran el equilibrio elemental.
+
+---
+
+## 12. Filosofía y Temas
+- **Equilibrio**: El Dao enseña que el exceso de cualquier elemento lleva al caos. El juego promueve decisiones balanceadas.
+- **Ascensión**: La meta final es trascender la mortalidad, pero a un costo espiritual.
+- **Moralidad**: Elecciones afectan tu karma, influyendo en eventos y finales.
+- **Inspiración**: Basado en novelas XianXia como "A Will Eternal" o "I Shall Seal the Heavens", con énfasis en crecimiento personal y aventuras épicas.
+
+---
 Las sectas son alianzas de cultivadores con filosofías únicas, basadas en el equilibrio elemental.
 
 - **Secta Montaña Etérea**: Maestros del flujo de Qi natural y la curación. Bonus: +10% Regeneración de Salud. Ubicada en las Montañas Etéreas.

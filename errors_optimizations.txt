@@ -1,0 +1,16 @@
+Posibles errores y optimizaciones encontradas durante la revisión completa del código:
+
+Errores:
+- En character.js: Duplicación del objeto DEFAULT_CHARACTER (líneas ~50-100 y ~150-200). Parece un error de edición; la segunda parte sobrescribe la primera. Recomiendo eliminar la duplicación.
+
+Optimizaciones:
+- Encapsular variables globales: 'character' en character.js podría estar en un módulo o clase para mejor aislamiento.
+- Reducir dependencias: Algunas funciones llaman a updateUI() múltiples veces; considerar un sistema de eventos para evitar llamadas redundantes.
+- Comentarios en CSS: ui.css y style.css tienen algunos estilos sin explicar; añadir comentarios para clases como .anatomy-visualizer (controla tamaño del panel de anatomía, cambiar width/height aquí para redimensionar).
+- Assets: En main.js, rutas de imágenes de dantians (dantian_mind.png, etc.) están hardcodeadas; mover a una constante para facilitar cambios.
+- Rendimiento: En combate.js, bucles forEach podrían optimizarse si hay muchos enemigos, pero actualmente es pequeño.
+- Validación: Añadir checks para null en más lugares, ej. en equipSkill si skillId no existe en SKILLS_DB.
+
+Notas generales:
+- El código es modular, pero algunos archivos importan todo de data.js; considerar lazy loading si crece.
+- UI: toggleLayer en main.js usa try-catch; podría mejorarse con checks de existencia.

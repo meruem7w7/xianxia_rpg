@@ -1,4 +1,13 @@
 // js/godmode.js - V1.7 (Added Essence Refill)
+/**
+ * Archivo: godmode.js
+ * Propósito: Proporciona herramientas de desarrollo/debugging para modificar el estado del juego.
+ * Incluye controles para escalar sprites, mover posiciones, matar enemigos, curar HP y rellenar esencia.
+ *
+ * Comentarios detallados:
+ * - Assets: Icono del botón en assets/img/icon_god_mode-.png. Tamaño: 60x60px fijo en CSS.
+ * - Cambios: Agregado botón "Llenar Esencia" para testing. Panel oculto por defecto, activable con el botón flotante.
+ */
 import { combatState, updateCombatBars } from './combat.js';
 import { character, persistCharacter } from './character.js';
 

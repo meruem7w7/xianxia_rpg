@@ -124,6 +124,19 @@ body {
     overflow-y: auto; 
     width: 100%; 
 }
+/* css/style.css */
+
+.nav-links {
+    flex: 1; 
+    padding: 20px 10px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+    
+    /* --- AGREGA ESTAS 2 LÍNEAS --- */
+    overflow-y: auto;  /* Permite scroll vertical si no cabe */
+    max-height: calc(100vh - 150px); /* Evita que crezca más allá de la pantalla */
+}
 
 /* =========================================
    4. HOGAR (Ajustado)

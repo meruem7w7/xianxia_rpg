@@ -4,6 +4,12 @@
  * la lógica de turnos, el renderizado de la interfaz de batalla, y las interacciones
  * entre el jugador y los enemigos. Implementa mecánicas como resonancia elemental,
  * aturdimiento y canalización de energía.
+ *
+ * Comentarios detallados:
+ * - Assets: Sprites de enemigos en assets/img/ (enemy_wolf_01.png, enemy_wolf_02.png). Iconos elementales en assets/icons/elements/element_${elem}.png.
+ *   Perlas: assets/img/pearl_gold_active.png (activa), assets/img/pearl_socket.png (inactiva). Glifo: assets/img/channeling_circle_base.png.
+ * - Tamaños: Enemigo sprite height: 50vh. Perlas: 20x20px (.pearl-socket). Elementos Wu Xing: 48x48px (.element-btn-img).
+ * - Cambios: Sistema de canalización con filtros CSS elementales, barras de HP/Qi con texturas brush_*.png, drag & drop para Wu Xing.
  */
 
 // js/combat.js - v1.6 (Fixed Glyph & Bars)
@@ -127,12 +133,12 @@ function renderCombatStructure(enemyId) {
     enemyList.classList.add('hidden');
     arena.classList.remove('hidden');
     
-    let spriteUrl = 'assets/icons/elements/element_fire.png';
-    if (enemyId.includes('wolf')) spriteUrl = 'assets/img/enemy_wolf_01.png';
-    if (enemyId.includes('rabbit')) spriteUrl = 'assets/img/enemy_wolf_02.png';
+    let spriteUrl = 'assets/icons/elements/element_fire.png'; // Default fallback
+    if (enemyId.includes('wolf')) spriteUrl = 'assets/img/enemy_wolf_01.png'; // Lobo: assets/img/enemy_wolf_01.png
+    if (enemyId.includes('rabbit')) spriteUrl = 'assets/img/enemy_wolf_02.png'; // Conejo: assets/img/enemy_wolf_02.png
 
     const elemKey = combatState.enemy.element || 'wood';
-    const elemIcon = `assets/icons/elements/element_${elemKey}.png`;
+    const elemIcon = `assets/icons/elements/element_${elemKey}.png`; // Icono elemental: assets/icons/elements/element_wood.png etc.
     
     // Color del glifo según elemento
     const elemColor = ELEMENTS[elemKey] ? ELEMENTS[elemKey].color : 'gold';
@@ -236,13 +242,13 @@ function renderWuXingInterface() {
 
         const btn = document.createElement('button');
         btn.className = 'element-btn-img';
-        btn.innerHTML = `<img src="assets/icons/elements/element_${pos.id}.png" alt="${pos.id}">`;
+        btn.innerHTML = `<img src="assets/icons/elements/element_${pos.id}.png" alt="${pos.id}">`; // Icono: assets/icons/elements/element_metal.png etc. Tamaño: 48x48px
         btn.onclick = () => executePlayerAction(pos.skill);
         
         const pearl = document.createElement('div');
         pearl.className = 'pearl-socket';
         const isActive = (combatState.resonance === pos.id);
-        const pearlImg = isActive ? 'assets/img/pearl_gold_active.png' : 'assets/img/pearl_socket.png';
+        const pearlImg = isActive ? 'assets/img/pearl_gold_active.png' : 'assets/img/pearl_socket.png'; // Perla activa/inactiva: 20x20px
         pearl.innerHTML = `<img src="${pearlImg}" style="width:100%; height:100%;">`; 
 
         wrapper.appendChild(btn);

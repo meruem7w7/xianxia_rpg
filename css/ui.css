@@ -348,7 +348,6 @@ ul li {
     width: 300px; /* Ajusta al ancho de tus PNGs */
     height: 500px; /* Ajusta al alto de tus PNGs */
 }
-
 /* Grid de botones de capas */
 .layers-grid {
     display: flex;
@@ -393,7 +392,7 @@ ul li {
        Saturate(3) -> Intensifica el color.
        Hue-rotate(-50deg) -> Mueve el tono hacia el rojo/rosado.
     */
-    filter: sepia(1) saturate(2.8) hue-rotate(-50deg) contrast(1.1);
+    filter: sepia(1) saturate(2.5)  hue-rotate(-50deg)  contrast(1)   ;
     
     /* mix-blend-mode: multiply;  <-- DESACTIVADO
        Si la silueta base es negra, 'multiply' haría desaparecer los músculos.
@@ -435,80 +434,89 @@ ul li {
     animation: levitate-mind 4s infinite ease-in-out;
 }
 
-/* ESTILOS DE LOS NUEVOS ASSETS */
-.dantian-img {
-    position: absolute;
-    left: 50%; /* Centrado horizontal */
-    width: 60px; /* Ajusta según el tamaño de tus PNG */
-    height: 60px;
-    object-fit: contain;
-    z-index: 20; /* Encima de todo */
-    pointer-events: none; /* Dejar pasar clic a capas inferiores si es necesario */
+/* --- ESTILOS DEL SISTEMA DE DANTIANS --- */
+
+/* 1. Capa Nebulosa Base (Fondo) */
+.nebula-base {
+    opacity: 1.0; /* AJUSTAR: Transparencia (0.0 a 1.0) */
+    z-index: 10; /* Detrás de los orbes */
+    /* Opcional: un poco oscuro para resaltar los dantians */
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.5)); 
+    /* Animación de movimiento (Mantenla si la tenías) */
+    animation: nebulaMove var(--nebula-speed) infinite linear;
 }
 
-/* Ajuste de posiciones verticales para encajar en la silueta */
-.pos-mind { top: 11%; width: 50px; height: 50px; }
-.pos-chest { top: 28%; width: 70px; height: 70px; }
-.pos-abdomen { top: 46%; width: 65px; height: 65px; }
-
-/* Capa Nebulosa */
-#layer-nebula {
-    opacity: 0.8;
-    mix-blend-mode: screen; /* Para que brille sobre lo negro */
-    filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
-}
-
-/* Icono de Rango de Raíz (En el panel de control) */
-.rank-icon-display {
-    width: 40px; 
-    height: 40px; 
-    vertical-align: middle; 
-    margin-right: 10px;
-    filter: drop-shadow(0 0 5px gold);
-}
-
-/* - AÑADIR O REEMPLAZAR */
-
-/* Clase mágica para recortar con la forma del cuerpo */
-.masked-layer {
-    /* Usa la variable definida en el HTML inline */
-    -webkit-mask-image: var(--body-mask);
-    mask-image: var(--body-mask);
-    
-    /* Ajustes para que la máscara cubra todo */
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-position: center;
-}
-
-/* Efecto de Profundidad (Volumen) */
-.body-inner-shadow {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    
-    /* Sombra interna negra fuerte en los bordes */
-    box-shadow: inset 0 0 20px 5px rgba(0,0,0,0.9);
-    
-    z-index: 15; /* Encima de nebulosa y redes, debajo de dantians */
+.spiritroot-overlay {
+    opacity: 0.7; /* AJUSTAR: Transparencia (0.0 a 1.0) */
+    z-index: 60; /* Detrás de los orbes */
+    /* Animación de movimiento (Mantenla si la tenías) */;
     pointer-events: none;
 }
 
-/* Ajuste Nebulosa para que parezca "Líquido Interior" */
-#layer-nebula {
-    opacity: 0.9;
-    /* Screen o Overlay funcionan bien para integrar con negro */
-    mix-blend-mode: screen; 
-    /* Un poco de blur ayuda a que parezca gas */
-    filter: blur(0.5px) contrast(1.2);
+
+/* 2. Capa Nebulosa Overlay (Frente Semi-Transparente) */
+.nebula-overlay {
+    opacity: 0.4; /* AJUSTAR: Transparencia (0.0 a 1.0) */
+    z-index: 30;  /* Encima de los orbes */
+    mix-blend-mode: screen; /* Fusión de luz */
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.5));
+    /* Animación de movimiento (Mantenla si la tenías) */
+    animation: nebulaMove var(--nebula-speed) infinite linear;
+    pointer-events: none;
 }
 
-/* Ajuste Raíz Espiritual */
-#layer-spiritroot {
-    /* La raíz brilla más si está "dentro" */
-    mix-blend-mode: screen; 
-    z-index: 5;
+/* 3. Imágenes de los Dantians (Orbes) */
+.dantian-img {
+    position: absolute;
+    left: 50%; /* Centrado horizontal */
+    transform: translate(-50%, -50%); /* Ajuste de centro */
+    opacity: 0.8; /* Ligera transparencia */
+    z-index: 20; /* En el medio del sándwich */
+    mix-blend-mode: screen; /* Fusión de luz */
+    filter: drop-shadow(0 0 1px rgba(114, 111, 111, 0.5));
+    /* Animación de movimiento (Mantenla si la tenías) */
+    animation: nebulaMove var(--nebula-speed) infinite linear;
+    object-fit: contain;
 }
+
+/* POSICIONES VERTICALES (Ajustar según tus siluetas) */
+.pos-mind {
+    top: 15%; /* Altura de la cabeza */
+    width: 40px; height: 35px;
+
+}
+.pos-chest {
+    top: 30%; /* Altura del corazón */
+    width: 40px; height: 35px;
+
+}
+.pos-abdomen {
+    top: 45%; /* Altura del Dantian Inferior/Ombligo */
+    width: 40px; height: 38px;
+
+}
+
+/* --- ANIMACIONES PARA LOS DANTIANS --- */
+
+/* Dantian Mente: Flotar suavemente */
+@keyframes floatY {
+    0%, 50% { transform: translate(-50%, -50%) translateY(0px); } /* Posición base */
+    50% { transform: translate(-50%, -50%) translateY(-4px); } /* Mover hacia arriba 5px */
+    80% { transform: translate(-50%, -50%) translateY(0px); } /* Volver a la posición base */
+
+}
+.anim-float { animation: floatY 13s ease-in-out infinite; }
+
+/* Dantian Pecho: Latido (Pulso) */
+@keyframes heartBeat {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+    50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+}
+.anim-pulse { animation: heartBeat 2s infinite; }
+
+/* Dantian Abdomen: Giro lento (Vórtice de energía) */
+@keyframes spinSlow {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+.anim-spin { animation: spinSlow 55s linear infinite; }

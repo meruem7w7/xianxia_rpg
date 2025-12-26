@@ -1,3 +1,600 @@
+# XIANXIA RPG - CÓDIGO COMPLETO & DOCUMENTACIÓN
+
+## ACTUALIZACIÓN DICIEMBRE 25, 2025
+
+**Estado General: 🟢 ROBUSTO**
+- **Total Archivos**: 16 JS + 2 CSS + 1 HTML
+- **Líneas de Código**: ~3,045 JS + ~5,000 CSS
+- **Funcionalidad**: 87.5% Implementada
+- **Errores Conocidos**: ✅ CERO (DEFAULT_CHARACTER duplication removida)
+
+---
+
+# 📋 INVENTARIO DE ARCHIVOS
+
+## Archivos JavaScript (16 total, ~3,045 líneas)
+
+| Archivo | Líneas | Estado | Propósito |
+|---------|--------|--------|----------|
+| main.js | ~850 | ✅ | Punto entrada, auth, navegación, paneles, renderAnatomyPanel() |
+| character.js | ~420 | ✅ | Gestión personaje, stats, anatomía, meditación |
+| ui.js | ~280 | ✅ | UI, overlays, Wu Xing drag-drop, logs |
+| combat.js | ~520 | ✅ | Sistema combate, turnos, canalización, AI enemigos |
+| data.js | ~150 | ✅ | BD: elementos, skills, items, enemigos, zonas |
+| sects.js | ~165 | ✅ | Sistema sectas/gremios con bonuses |
+| crafting.js | ~90 | ✅ | Sistema crafteo con recetas |
+| character_creation.js | ~75 | ✅ | Creación personaje: 3 pasos |
+| map.js | ~75 | ✅ | Sistema viajes entre ubicaciones |
+| godmode.js | ~70 | ✅ | Herramientas debug |
+| skills.js | ~65 | ✅ | Renderizado habilidades |
+| inventory.js | ~65 | ✅ | Gestión inventario, equipo, consumibles |
+| chat.js | ~45 | ✅ | Sistema chat local |
+| persistence.js | ~75 | ✅ | Autenticación, localStorage, guardado |
+| quest.js | ~65 | ⚠️ | Misiones (placeholder, necesita datos) |
+| npc.js | ~35 | ⚠️ | NPCs (placeholder, necesita datos) |
+
+## Archivos CSS (2 total, ~5,000 líneas)
+
+| Archivo | Líneas | Propósito |
+|---------|--------|----------|
+| style.css | ~3,900 | Estilos globales, layout, animaciones |
+| ui.css | ~1,000 | Componentes UI, Wu Xing, logs, overlays |
+
+## HTML (1 archivo)
+
+| Archivo | Propósito |
+|---------|----------|
+| index.html | Estructura base con 3 tabs (auth, creation, game) |
+
+---
+
+# 🎨 SISTEMA DE ANATOMÍA SAGRADA (renderAnatomyPanel)
+
+## 📍 Ubicación: main.js
+
+### Rutas de Assets
+
+```javascript
+ASSETS_ANATOMY = {
+  base:              "assets/img/anatomy/silhouette_base_{gender}.png"
+  meridians:         "assets/img/anatomy/meridians_overlay_{suffix}.png"
+  bones:             "assets/img/anatomy/bones_overlay_{suffix}.png"
+  muscles:           "assets/img/anatomy/muscle_overlay_{suffix}.png"
+  muscles_2:         "assets/img/anatomy/muscle_overlay_{suffix}2.png"
+  muscles_3:         "assets/img/anatomy/muscle_overlay_{suffix}3.png"
+  spiritroot:        "assets/img/anatomy/spiritroot_overlay_{suffix}.png"
+  spiritroot_alone:  "assets/img/anatomy/spiritroot_{suffix}.png"
+  nebula:            "assets/img/anatomy/nebulosa_overlay_{suffix}.png"
+  d_mind:            "assets/img/anatomy/dantian_mente.png"         // 60x60px
+  d_chest:           "assets/img/anatomy/dantian_pecho.png"         // 70x70px
+  d_abdomen:         "assets/img/anatomy/dantian_abdomen.png"       // 80x80px
+}
+```
+
+### Estructura de Capas Visuales
+
+| Capa | Z-Index | Opacity | Blend Mode | Filters | CSS Class |
+|------|---------|---------|-----------|---------|-----------|
+| **BASE** | 30 | 1.0 | - | none | `.anatomy-base` |
+| **BONES** | 35 | 1.0 | - | none | `.anatomy-bones` |
+| **MERIDIANS** | 36 | 1.0 | - | drop-shadow(0 0 2px cyan) | `.anatomy-meridians` |
+| **MUSCLES (contenedor)** | 40 | - | mixed | - | `.anatomy-muscles` |
+| - Layer 1 | 41 | 0.3 | mixed | multiply | `.muscle-layer-1` |
+| - Layer 2 | 42 | 0.9 | normal | fixed | `.muscle-layer-2` |
+| - Layer 3 | 44 | - | - | multiply | `.muscle-layer-3` |
+| **SPIRITROOT (contenedor)** | 40 | - | mixed | - | `.anatomy-spiritroot` |
+| - Overlay | - | 1.0 | mixed | - | `.spiritroot-overlay` |
+| - Alone | - | 1.0 | mixed | ${ELEMENTAL_FILTER} | `.spiritroot-alone` |
+| - Layer | - | 1.0 | color-dodge | multiply | `.spiritroot-layer` |
+| **DANTIANS** | 50 | - | - | - | `.anatomy-dantians` |
+| - Nebula Base | - | 1.0 | - | none | `.nebula-base` |
+| - Mind Dantian | - | 1.0 | - | float animation | `.dantian-mind` |
+| - Chest Dantian | - | 1.0 | - | pulse animation | `.dantian-chest` |
+| - Abdomen Dantian | - | 1.0 | - | spin animation | `.dantian-abdomen` |
+| - Nebula Overlay | - | 1.0 | - | none | `.nebula-overlay` |
+
+### Dimensiones del Contenedor
+
+```css
+.anatomy-visualizer {
+  width: 300px;
+  height: 500px;
+  position: relative;
+  background: radial-gradient(circle, rgba(20,20,40,0.8), rgba(10,10,20,0.95));
+}
+
+.silhouette-container {
+  width: 300px;
+  height: 500px;
+  position: absolute;
+}
+```
+
+### Filtros Elementales para Spiritroot
+
+```javascript
+ROOT_FILTERS = {
+  fire:       "sepia(1) saturate(5) hue-rotate(-50deg)",
+  water:      "sepia(1) saturate(5) hue-rotate(180deg)",
+  wood:       "sepia(1) saturate(5) hue-rotate(50deg)",
+  earth:      "sepia(1) saturate(3) hue-rotate(-100deg)",
+  metal:      "grayscale(1) brightness(1.5)",
+  ice:        "sepia(1) saturate(3) hue-rotate(150deg)",
+  lightning:  "sepia(1) saturate(5) hue-rotate(220deg) brightness(1.5)"
+}
+```
+
+### Botones de Control
+
+```html
+👤 Base     - Mostrar/ocultar silueta base
+🌿 Spiritroot - Mostrar/ocultar raíz espiritual  
+⚡ Meridians - Mostrar/ocultar meridianos con glow cian
+💪 Muscles   - Mostrar/ocultar capas musculares
+💀 Bones     - Mostrar/ocultar esqueleto
+🌌 Dantians  - Mostrar/ocultar Dantians + nebulosa
+```
+
+### Información de Dantians Mostrada
+
+```
+┌─────────────────────────┐
+│ 🧠 Mar Conciencia (Upper) │
+│    Soul Force: {N}        │ Color: Cyan
+├─────────────────────────┤
+│ ❤️  Palacio Carmesí (Middle) │
+│    Pureza: {N}%          │ Color: #ff0055
+├─────────────────────────┤
+│ 🌊 Mar de Qi (Lower)      │
+│    Qi: {N}/{MAX}          │ Color: Gold
+└─────────────────────────┘
+```
+
+---
+
+# ⚔️ SISTEMA DE COMBATE
+
+## Ubicación: combat.js (~520 líneas)
+
+### Estructura de Combate
+
+```javascript
+Combat = {
+  state: "idle",           // idle, battling, won, lost
+  currentEnemy: null,      // ID del enemigo actual
+  enemyState: "IDLE",      // IDLE, CHANNELING, STUNNED
+  enemyHealth: 0,
+  essencePool: [],         // Array de perlas canalizadas
+  resonanceValue: 0,       // Multiplicador de daño
+  turnCounter: 0,
+  battleLog: []
+}
+```
+
+### Fases del Combate
+
+1. **Preparación**: Seleccionar enemigo → startCombat()
+2. **Turno Jugador**: 
+   - Seleccionar habilidad Wu Xing
+   - Consumir esencia elemental
+   - Calcular daño = base_dmg × resonanceValue
+3. **Canalización Enemiga**:
+   - Cambiar estado a CHANNELING
+   - Aplicar filtro elemental CSS
+   - Incrementar essencePool
+4. **Ataque Enemigo**:
+   - Desde CHANNELING: ultimateDamage
+   - Desde IDLE: normalDamage
+5. **Fin Combate**: Estado won/lost
+
+### Funciones Clave
+
+```javascript
+startCombat(enemyId)              // Inicia batalla
+executePlayerAction(skillId)      // Turno jugador
+enemyTurnLogic()                  // Turno enemigo
+startChanneling()                 // Inicia canalización
+performEnemyUltimate()            // Ataque especial
+interruptChanneling()             // Interrupción jugador
+updateCombatBars()                // Actualiza UI barras
+```
+
+### Enemigos Disponibles
+
+| Enemigo | HP | DMG | Drops | Ubicación |
+|---------|----|----|-------|-----------|
+| Wolf | 80 | 15 | Gold x5, Spiritstone x1 | ENEMIES_DB |
+| Rabbit | 40 | 8 | Gold x2, Herb x2 | ENEMIES_DB |
+
+### Assets de Combate
+
+```
+assets/img/
+  ├── enemy_wolf_01.png
+  ├── enemy_wolf_02.png
+  ├── channeling_circle_base.png  (glifo de canalización)
+  ├── pearl_gold_active.png       (perla 20x20px)
+  ├── pearl_socket.png            (socket 20x20px)
+  └── elements/
+      ├── element_fire.png   (48x48 en combate)
+      ├── element_water.png
+      ├── element_wood.png
+      ├── element_earth.png
+      └── element_metal.png
+```
+
+### Filtros CSS Elementales para Canalización
+
+```javascript
+CHANNEL_FILTERS = {
+  fire:   "drop-shadow(0 0 15px #ff6600) hue-rotate(-50deg)",
+  water:  "drop-shadow(0 0 15px #0099ff) hue-rotate(180deg)",
+  wood:   "drop-shadow(0 0 15px #00cc66) hue-rotate(50deg)",
+  earth:  "drop-shadow(0 0 15px #cc9900)",
+  metal:  "drop-shadow(0 0 15px #ccccff) grayscale(0.5)"
+}
+```
+
+---
+
+# 🎯 SISTEMA WU XING (Drag-Drop)
+
+## Ubicación: ui.js (~280 líneas)
+
+### Panel de Cultivo
+
+```html
+<div class="cultivation-panel">
+  <div class="wu-xing-slots">
+    <div class="slot slot-fire"     ondrop="UI.handleDrop(event, 'fire')">🔥</div>
+    <div class="slot slot-earth"    ondrop="UI.handleDrop(event, 'earth')">🪨</div>
+    <div class="slot slot-metal"    ondrop="UI.handleDrop(event, 'metal')">⚔️</div>
+    <div class="slot slot-water"    ondrop="UI.handleDrop(event, 'water')">💧</div>
+    <div class="slot slot-wood"     ondrop="UI.handleDrop(event, 'wood')">🌿</div>
+  </div>
+</div>
+```
+
+### Cálculo de Afinidad
+
+```javascript
+// harmony: 2 skills del mismo elemento
+// generation: Ciclo agua→madera→fuego→tierra→metal→agua
+// dissonance: Combinación no óptima
+
+UI.calculateAffinity() → {
+  harmony:   +20% daño
+  generation: +15% daño
+  dissonance: -10% daño
+}
+```
+
+### Funciones
+
+```javascript
+UI.renderCultivationPanel()    // Renderiza panel Wu Xing
+UI.handleDragStart(event)      // Inicia drag
+UI.handleDrop(event, element)  // Suelta skill en slot
+UI.calculateAffinity()         // Calcula bonus
+UI.checkGeneration(skill1, skill2)  // Verifica ciclo
+```
+
+---
+
+# 📊 BASE DE DATOS CENTRALIZADA
+
+## Ubicación: data.js (~150 líneas)
+
+### ELEMENTS (5 + 2 especiales)
+
+```javascript
+ELEMENTS = {
+  fire:       { weak: "water", strong: "wood", color: "#ff6600" },
+  water:      { weak: "earth", strong: "fire", color: "#0099ff" },
+  wood:       { weak: "metal", strong: "water", color: "#00cc66" },
+  earth:      { weak: "wood", strong: "metal", color: "#cc9900" },
+  metal:      { weak: "fire", strong: "earth", color: "#ccccff" },
+  ice:        { weak: "fire", strong: "water", color: "#00ffff" },
+  lightning:  { weak: "water", strong: "metal", color: "#ffff00" }
+}
+```
+
+### SKILLS_DB
+
+**Oficios Pasivos** (XP → stats cuando meditas):
+- meditation (regen Qi +10)
+- alchemy (essence +2%)
+- forging (attack +1)
+- herbalism (defense +1)
+- mining (gold +20%)
+
+**Artes Marciales Activas** (Combate):
+- basic_attack (fuego, 20 DMG)
+- water_shield (agua, reduce daño)
+- wood_regen (madera, cura)
+- earth_spike (tierra, 25 DMG)
+- metal_slash (metal, 30 DMG)
+
+### ITEMS_DB
+
+**Armas**:
+- rusty_sword (10 ATK, rareza common)
+- iron_sword (15 ATK, rareza uncommon)
+
+**Consumibles**:
+- low_pill (cura 20 HP)
+- high_pill (cura 50 HP)
+
+**Materiales**:
+- spirit_stone (componente)
+- iron_ore (componente)
+
+**Moneda**:
+- gold (1 = 1 moneda)
+
+### ENEMIES_DB
+
+```javascript
+wolf: {
+  hp: 80,
+  dmg: 15,
+  drops: { gold: 5, spirit_stone: 1 }
+},
+rabbit: {
+  hp: 40,
+  dmg: 8,
+  drops: { gold: 2, herb: 2 }
+}
+```
+
+### ROOT_TYPES
+
+```javascript
+pseudo:    // Frágil, +20% XP
+true:      // Base sólida
+heavenly:  // Raro, +10% stats
+mutant:    // Especial, efectos únicos
+```
+
+### CULTIVATION_REALMS
+
+```javascript
+mortal, foundation, qi_circulation, core_formation, nascent_spirit
+```
+
+---
+
+# 🎮 FLUJO DE JUEGO PRINCIPAL
+
+## main.js - Ciclo Principal
+
+```
+1. AUTENTICACIÓN (persistence.js)
+   ├─ Login screen
+   ├─ Validar credenciales
+   └─ Cargar sesión localStorage
+
+2. CREACIÓN O CARGA
+   ├─ Primer login? → character_creation.js (3 pasos)
+   ├─ Ya existe? → loadCharacterForCurrentUser()
+   └─ Migrar datos (backwards compatible)
+
+3. DASHBOARD (main.js - switchTab)
+   ├─ Tab 0: Home         (renderHomePanel)
+   ├─ Tab 1: Anatomía     (renderAnatomyPanel) ⭐
+   ├─ Tab 2: Skills       (renderSkillsPanel)
+   ├─ Tab 3: Inventory    (renderInventoryPanel)
+   ├─ Tab 4: Combat       (renderCombatListPanel) ⭐
+   ├─ Tab 5: Sects        (renderSectsPanel)
+   ├─ Tab 6: Crafting     (renderCraftingPanel)
+   ├─ Tab 7: Map          (renderMapPanel)
+   └─ Tab 8: Chat         (renderChatPanel)
+
+4. INTERACCIONES
+   ├─ Character.meditate() → +10 Qi + regen dantian_lower
+   ├─ Character.equipSkill(slot, skillId) → equippedSkills
+   ├─ Combat.startCombat(enemyId) → Batalla por turnos
+   ├─ Sect.joinSect(sectId) → Bonuses +10% regen
+   ├─ Map.travel(locationId) → Cambiar ubicación
+   └─ Chat.sendMessage() → Sistema local
+
+5. PERSISTENCIA
+   └─ localStorage (5-10MB típico)
+      ├─ xx_users: { username: password }
+      ├─ xx_session: { currentUser, currentCharacter }
+      └─ xx_characters_{user}: { completeCharacter }
+```
+
+---
+
+# 💾 ESTRUCTURA CHARACTER
+
+## Ubicación: character.js (~420 líneas)
+
+```javascript
+DEFAULT_CHARACTER = {
+  // IDENTIDAD
+  name: "Cultivador",
+  gender: "man",              // 'man' o 'woman'
+  
+  // PROGRESO
+  level: 1,
+  experience: 0,
+  maxExperience: 100,
+  
+  // VITALIDAD (Legacy)
+  health: 100,
+  maxHealth: 100,
+  essence: 50,                // Esencia Espiritual
+  maxEssence: 50,
+  
+  // COMBATE
+  attack: 10,
+  defense: 5,
+  
+  // ATRIBUTOS (Phase 1)
+  stats: {
+    speed: 10,
+    lifesteal_perc: 0,
+    essence_leech_perc: 0,
+    karma_luck: 0,
+    willpower: 0,
+    perception: 0
+  },
+  
+  // FUNDAMENTO
+  root: {
+    type: "true",
+    elements: ["fire", "wood", "metal"],
+    variant: null              // lightning, ice, etc.
+  },
+  
+  // ANATOMÍA
+  anatomy: {
+    dantian_lower:  { current: 0, max: 100 },     // Qi
+    dantian_middle: { purity: 0, layer: 1 },      // Vigor
+    dantian_upper:  { soul_force: 10, perception: 5 },  // Alma
+    meridians_blocked: 0
+  },
+  
+  // INTENCIONES
+  intents: {
+    slaughter_points: 0,
+    current_intent: null       // "slaughter", "ethereal"
+  },
+  
+  // ECONOMÍA
+  gold: 0,
+  spiritStones: 0,
+  
+  // INVENTARIO
+  inventory: { "rusty_sword": 1, "low_pill": 3 },
+  equipment: { weapon: null, armor: null },
+  
+  // WU XING (5 slots)
+  equippedSkills: {
+    metal: null, wood: null, water: null, fire: null, earth: null
+  },
+  learnedSkills: ["basic_attack"],
+  
+  // AFILIACIÓN
+  sect: null
+}
+```
+
+### Funciones Principales
+
+```javascript
+Character.loadCharacterForCurrentUser()  // Cargar + migrar
+Character.meditate()                     // +10 Qi + regen dantian_lower
+Character.equipSkill(slot, skillId)     // Asignar habilidad a slot
+Character.gainExperience(amount)        // Añadir XP
+Character.levelUp()                     // Subir nivel
+Character.syncCharacterToUI()           // Actualizar UI global
+```
+
+---
+
+# 🔑 FUNCIONES CLAVE POR ARCHIVO
+
+## character.js
+- `loadCharacterForCurrentUser()` - Carga personaje con migración
+- `meditate()` - Restaura 10 Qi y regenera dantian_lower
+- `equipSkill(slot, skillId)` - Equipa habilidad en slot Wu Xing
+- `gainExperience(amount)` - Añade XP (con levelUp automático)
+- `syncCharacterToUI()` - Sincroniza estado global
+
+## main.js
+- `switchTab(tabIndex)` - Cambia panel activo
+- `renderHomePanel()` - Muestra stats principales
+- `renderAnatomyPanel()` - 🌟 Visualiza anatomía con 6 capas + toggles
+- `renderCombatListPanel()` - Lista enemigos disponibles
+- `toggleLayer(layerName)` - Muestra/oculta capa de anatomía
+
+## ui.js
+- `UI.renderCultivationPanel()` - Panel Wu Xing 5 slots
+- `UI.handleDrop(event, element)` - Suelta skill en slot
+- `UI.calculateAffinity()` - Calcula harmony/generation/dissonance
+- `UI.log(message)` - Añade mensaje a log con timestamp
+
+## combat.js
+- `startCombat(enemyId)` - Inicia batalla
+- `executePlayerAction(skillId)` - Turno del jugador
+- `enemyTurnLogic()` - IA del enemigo
+- `startChanneling()` - Inicia canalización enemiga
+- `performEnemyUltimate()` - Ataque especial
+
+## persistence.js
+- `validateCredentials(username, pass)` - Auth
+- `saveCharacter()` - Guarda en localStorage
+- `loadCharacterForCurrentUser()` - Carga desde localStorage
+
+## sects.js
+- `Sect.joinSect(sectId)` - Unirse a secta (+bonuses)
+- `Sect.renderSectsPanel()` - Muestra panel sectas
+
+## crafting.js
+- `Crafting.craftItem(recipeName)` - Craftear item
+
+---
+
+# 📁 ESTRUCTURA DIRECTORIO ASSETS
+
+```
+assets/
+├── img/
+│   ├── anatomy/
+│   │   ├── silhouette_base_man.png
+│   │   ├── silhouette_base_woman.png
+│   │   ├── bones_overlay_man.png
+│   │   ├── bones_overlay_woman.png
+│   │   ├── muscle_overlay_man.png
+│   │   ├── muscle_overlay_man2.png      ← NEW (opacity 0.9)
+│   │   ├── muscle_overlay_man3.png      ← NEW (opacity 0.7)
+│   │   ├── muscle_overlay_woman.png
+│   │   ├── muscle_overlay_woman2.png    ← NEW
+│   │   ├── muscle_overlay_woman3.png    ← NEW
+│   │   ├── meridians_overlay_man.png
+│   │   ├── meridians_overlay_woman.png
+│   │   ├── spiritroot_overlay_man.png
+│   │   ├── spiritroot_overlay_woman.png
+│   │   ├── spiritroot_man.png           ← NEW (spiritroot_alone)
+│   │   ├── spiritroot_woman.png         ← NEW
+│   │   ├── nebulosa_overlay_man.png
+│   │   ├── nebulosa_overlay_woman.png
+│   │   ├── dantian_mente.png            (60x60px, float animation)
+│   │   ├── dantian_pecho.png            (70x70px, pulse animation)
+│   │   └── dantian_abdomen.png          (80x80px, spin animation)
+│   │
+│   ├── HUD-UI/
+│   │   ├── [Otros assets UI]
+│   │
+│   ├── enemy_wolf_01.png
+│   ├── enemy_wolf_02.png
+│   ├── player_meditating.png
+│   ├── channeling_circle_base.png
+│   ├── pearl_gold_active.png            (20x20px)
+│   ├── pearl_socket.png                 (20x20px)
+│   ├── icon_godmode.png                 (120x80px)
+│   ├── brush_bar_hp.png
+│   ├── brush_bar_essence.png
+│   └── brush_bar_stamina.png
+│
+└── icons/
+    └── elements/
+        ├── element_fire.png             (48x48 combate, 30x30 Wu Xing)
+        ├── element_water.png
+        ├── element_wood.png
+        ├── element_earth.png
+        ├── element_metal.png
+        ├── element_ice.png
+        └── element_lightning.png
+```
+
+---
+
+# ✅ ESTADO DE ERRORES
+
 ## Archivo: index.html
 ```html
 <!DOCTYPE html>

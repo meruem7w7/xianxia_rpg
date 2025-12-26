@@ -250,4 +250,233 @@ Cada región tiene enemigos únicos y recursos específicos.
 
 ---
 
+---
+
+## 5. Raíces Espirituales y Constituciones Físicas
+
+### 🧱 PARTE 1: LAS 12 RAÍCES ESPIRITUALES (El Destino del Cielo)
+Estas determinan la afinidad con el Qi y la velocidad de cultivo.
+
+A. LOS CINCO ELEMENTOS (El Ciclo Mortal)
+1. Raíz del Oro Negro Soberano (Metal)
+
+ID: root_metal_sovereign
+
+Descripción Lore: "Tu Qi no fluye; corta. Tus meridianos resuenan con el sonido de espadas chocando. Naciste para la guerra, pero tu rigidez te hace quebradizo ante la adversidad emocional."
+
+Buff Mecánico: +20% Daño Crítico, +10% Defensa Física. -10% Velocidad de Recuperación de Qi (El metal es frío).
+
+Visual (Dantian): Un orbe de Plata Líquida con picos afilados que intentan perforar el contenedor del Dantian. Destellos blancos estroboscópicos.
+
+2. Raíz del Bosque de los Mil Años (Madera)
+
+ID: root_wood_ancient
+
+Descripción Lore: "La vida se desborda en ti como una plaga benigna. Tu sangre huele a savia y tierra mojada. Eres difícil de matar, pero tu naturaleza pacífica duda al asestar el golpe final."
+
+Buff Mecánico: +30% Efectividad de Píldoras/Curación, +10% Salud Máxima. -10% Daño de Ataque Directo.
+
+Visual (Dantian): Una semilla de Verde Esmeralda Neón flotando, con raíces de luz que se extienden suavemente hacia los otros meridianos.
+
+3. Raíz del Abismo Insondable (Agua)
+
+ID: root_water_abyss
+
+Descripción Lore: "Tu espíritu es vasto, profundo y aterradoramente silencioso. Absorbes el Qi como el océano traga barcos. Tu fuerza radica en la erosión constante, no en el impacto súbito."
+
+Buff Mecánico: +20% Capacidad Máxima de Qi, +15% Velocidad de Regeneración de Qi. -10% Defensa Física (El agua es suave).
+
+Visual (Dantian): Un vórtice de Azul Zafiro Profundo. No emite luz hacia afuera, sino que parece absorber la luz ambiental de la UI.
+
+4. Raíz de la Llama del Corazón Verdadero (Fuego)
+
+ID: root_fire_heart
+
+Descripción Lore: "Una brasa que nunca se apaga arde en tu vientre. Tu temperamento es explosivo y tu Qi quema las impurezas con violencia. El poder es tuyo, pero corres el riesgo de consumirte a ti mismo."
+
+Buff Mecánico: +25% Daño de Ataque, +10% Velocidad de Cultivo (Quema rápido). +5% Probabilidad de Desviación de Qi (Riesgo de auto-daño).
+
+Visual (Dantian): Una esfera de Rojo/Naranja Neón inestable, pulsando violentamente como una estrella a punto de colapsar.
+
+5. Raíz de la Montaña Inmortal (Tierra)
+
+ID: root_earth_mountain
+
+Descripción Lore: "Pesado. Inamovible. Tu presencia suprime el aire alrededor. Mientras tengas los pies en el suelo, eres invencible, pero tu espíritu carece de la ligereza para ascender rápidamente."
+
+Buff Mecánico: +30% Defensa Física, +20% Resistencia a Debuffs. -20% Velocidad de Movimiento/Evasión.
+
+Visual (Dantian): Un cubo perfecto de Ámbar Dorado sólido, girando lenta y pesadamente. Grietas de luz amarilla.
+
+B. LAS MUTACIONES (Las Anomalías de la Tormenta)
+6. Raíz del Loto de Escarcha (Hielo - Mutación de Agua)
+
+ID: root_ice_lotus
+
+Descripción Lore: "Una anomalía cruel. Tu cuerpo está perpetuamente frío al tacto. Tu Qi detiene la entropía, preservando la juventud pero congelando las emociones. Un camino solitario hacia la perfección."
+
+Buff Mecánico: Probabilidad de Congelar/Aturdir enemigos al golpear, +10% Defensa Mental. -30% Afinidad con NPCs (Aura gélida).
+
+Visual (Dantian): Un cristal de hielo fracturado en forma de loto, color Cian Pálido. Emite neblina que "congela" los bordes de la UI del Dantian.
+
+7. Raíz de la Tribulación Celestial (Rayo - Mutación de Fuego/Metal)
+
+ID: root_lightning_tribulation
+
+Descripción Lore: "Llevas el castigo de los cielos en tus venas. Tu Qi es errático, doloroso y devastador. Eres la encarnación del juicio divino. Matas rápido, o mueres rápido."
+
+Buff Mecánico: +40% Velocidad de Ataque, +20% Probabilidad de Crítico. Daño constante a la propia salud al usar técnicas (El cuerpo sufre).
+
+Visual (Dantian): Arcos de electricidad Violeta/Blanco que saltan caóticamente, rompiendo la silueta del Dantian momentáneamente.
+
+8. Raíz del Vendaval de los Nueve Cielos (Viento - Mutación de Madera/Fuego)
+
+ID: root_wind_gale
+
+Descripción Lore: "No tienes forma. Tu Qi es invisible y corta desde todas las direcciones. Detestas las ataduras y las reglas de las sectas. Libertad absoluta a cambio de una base inestable."
+
+Buff Mecánico: +40% Evasión, +20% Velocidad de Mapa. -20% Defensa contra ataques de Área.
+
+Visual (Dantian): Un remolino de Verde Pálido Transparente. Apenas visible, distorsiona el fondo como una ola de calor.
+
+C. LAS RAÍCES CELESTIALES (Las Leyendas del 1%)
+9. Raíz del Yin Lunar Puro (Celestial)
+
+ID: root_yin_pure
+
+Descripción Lore: "La esencia de la muerte tranquila y la noche eterna. Atraes a los espíritus y las sombras te obedecen. Tu cultivo es 10 veces más rápido bajo la luz de la luna, pero el sol te debilita."
+
+Buff Mecánico: Robo de Vida (Vampirismo de Qi), Control de Bestias Espirituales facilitado. Debilidad: Daño de Fuego recibido x1.5.
+
+Visual (Dantian): Un agujero negro rodeado de un halo Púrpura Oscuro. "Gotea" sombras líquidas hacia abajo.
+
+10. Raíz del Yang Solar Supremo (Celestial)
+
+ID: root_yang_supreme
+
+Descripción Lore: "Eres un segundo sol. Tu mera presencia quema a los demonios y purifica la corrupción. Tu destino es gobernar, pues nadie puede mirarte directamente sin cegarse."
+
+Buff Mecánico: Inmunidad a Venenos/Maldiciones, Aura de Daño Pasivo a enemigos cercanos. No puedes usar Sigilo/Ocultación.
+
+Visual (Dantian): Una esfera de Oro Blanco Cegador. Rayos de luz sólida atraviesan toda la pantalla de la UI.
+
+11. Raíz del Vacío Hambriento (Espacio - Ultra Rara)
+
+ID: root_void_hungry
+
+Descripción Lore: "Tú no existes. Eres un error en el tejido de la realidad. Tu Qi no se cultiva; se roba. Puedes devorar ataques, objetos y suerte ajena. El universo te odia por existir."
+
+Buff Mecánico: Probabilidad de anular completamente cualquier daño (Intangibilidad), Capacidad de Inventario x10. Karma negativo pasivo constante (El mundo te rechaza).
+
+Visual (Dantian): Ausencia total de píxeles. Un círculo donde se ve el "fondo" de la página web o negro absoluto (#000000), con un borde de "glitch" digital cromático.
+
+12. Raíz del Río del Tiempo (Tiempo - Única)
+
+ID: root_time_river
+
+Descripción Lore: "Ves el fluir del Samsara. Para ti, un segundo es un siglo. Tu cuerpo envejece y rejuvenece aleatoriamente. Comprendes que la muerte es solo un trámite administrativo."
+
+Buff Mecánico: Probabilidad de "Resetear" el turno (Undo), Cultivo Offline x500% (El tiempo pasa diferente para ti). Stats físicos aleatorios cada día.
+
+Visual (Dantian): Un reloj de arena de Polvo de Estrellas que fluye hacia arriba en lugar de hacia abajo.
+
+### 💪 PARTE 2: LAS 12 CONSTITUCIONES FÍSICAS (El Recipiente)
+Estas determinan los bonificadores pasivos y restricciones de juego.
+
+Cuerpo Mortal Desechable (Base)
+
+Lore: Carne y hueso ordinarios. Se rompe con facilidad.
+
+Efecto: Ninguno. Estándar.
+
+Cuerpo del Tirano Celestial
+
+Lore: Músculos densos como el hierro divino. La piel repele espadas comunes.
+
+Ventaja: Defensa Física x3. Puedes equipar armas pesadas sin penalización.
+
+Defecto: No puedes aprender Técnicas de Magia (Hechizos) complejas. Solo fuerza bruta.
+
+Huesos de Espada Innata
+
+Lore: Tu esqueleto es afilado. Tu propio Qi corta tu carne si no tienes cuidado.
+
+Ventaja: Daño con Espadas +50%. Tu aura corta a quien te toque.
+
+Defecto: Defensa -20%. Eres un "Cañón de Cristal".
+
+Cuerpo de Jade Puro
+
+Lore: Perfecto, sin poros, sin impurezas. La suciedad del mundo resbala sobre ti.
+
+Ventaja: Velocidad de Cultivo +30% (El Qi entra sin resistencia). Resistencia a Venenos.
+
+Defecto: Constitución frágil. Salud Máxima -20%.
+
+Ojos Espirituales del Cielo
+
+Lore: Tus pupilas son dobles. Ves los hilos del Qi y los tesoros ocultos bajo tierra.
+
+Ventaja: Ves el contenido de los inventarios de NPCs. Detectas emboscadas automáticamente.
+
+Defecto: Sensibilidad extrema. Los ataques de luz te ciegan (Stun x2 duración).
+
+Cuerpo de la Plaga de las Diez Mil Bestias
+
+Lore: Tu sangre es veneno negro. Las plantas mueren donde pisas.
+
+Ventaja: Inmunidad a Venenos. Tus ataques aplican "Toxicidad" acumulativa.
+
+Defecto: Reputación inicial -50. Las Sectas Ortodoxas te atacan a la vista.
+
+Constitución del Corazón de Loto (Mental)
+
+Lore: Una mente clara como un espejo. Inmune al miedo y a las ilusiones.
+
+Ventaja: Inmune a "Terror" y "Supresión" en la Fase de Presión de Combate.
+
+Defecto: Empatía nula. No puedes formar relaciones románticas/familiares (Bloquea Sistema de Legado).
+
+Cuerpo del Encanto Zorruno
+
+Lore: Una belleza sobrenatural que distorsiona el juicio de los demás.
+
+Ventaja: Precios en tiendas -50%. Probabilidad de que los enemigos fallen su primer ataque por "Duda".
+
+Defecto: Atraes acosadores (Eventos aleatorios de "Cultivador Lujurioso" te ataca).
+
+Piernas del Roc Divino
+
+Lore: Huesos huecos y ligeros. Nacido para no tocar el suelo.
+
+Ventaja: Evasión +40%. Puedes huir de cualquier batalla (100% éxito).
+
+Defecto: Capacidad de Carga -50%. No puedes llevar armaduras pesadas.
+
+Cuerpo de Sangre Devoradora (Vampírico)
+
+Lore: Tu cuerpo no genera sangre, debe robarla.
+
+Ventaja: Recuperas 10% del daño infligido como Salud.
+
+Defecto: Si no matas en 3 días, entras en "Frenesí Hambriento" (Stats reducidos a la mitad).
+
+Constitución del Destino Roto (Maldito)
+
+Lore: El Cielo intenta matarte activamente con accidentes constantes.
+
+Ventaja: Probabilidad de Crítico +50% (Vives al límite). Encuentras tesoros absurdos por pura suerte absurda.
+
+Defecto: Probabilidad de "Tribulación Aleatoria" (Rayo cae del cielo) al subir de nivel es 90%.
+
+Cuerpo del Dios Marcial (Equilibrado)
+
+Lore: La fusión perfecta de fuerza y agilidad. El guerrero definitivo.
+
+Ventaja: Puedes aprender TODAS las técnicas marciales (Físicas) al instante.
+
+Defecto: Requiere el doble de Recursos (Píldoras/Piedras) para avanzar de Reino. El cuerpo exige combustible masivo.
+
+---
+
 Este lore es expansible. Si deseas añadir detalles específicos, modificar secciones o integrar mecánicas nuevas, ¡házmelo saber! El Dao fluye, y tu historia evoluciona con él.

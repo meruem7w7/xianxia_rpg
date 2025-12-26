@@ -383,23 +383,7 @@ ul li {
 
 /* */
 
-/* Músculos: Base Blanca teñida a Rojo Sangre */
-#layer-muscles {
-    opacity: 1; /* Sólido, nada de rayos X */
-    
-    /* FILTRO DE TEÑIDO: 
-       Sepia(1) -> Convierte blanco/negro en sepia (marrón).
-       Saturate(3) -> Intensifica el color.
-       Hue-rotate(-50deg) -> Mueve el tono hacia el rojo/rosado.
-    */
-    filter: sepia(1) saturate(2.5)  hue-rotate(-50deg)  contrast(1)   ;
-    
-    /* mix-blend-mode: multiply;  <-- DESACTIVADO
-       Si la silueta base es negra, 'multiply' haría desaparecer los músculos.
-       Usamos 'normal' para que se vean sobre la silueta negra. 
-    */
-    mix-blend-mode: normal; 
-}
+
 
 /* --- ANIMACIONES DE DANTIANS --- */
 

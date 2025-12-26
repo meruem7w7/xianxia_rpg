@@ -306,7 +306,10 @@ function renderAnatomyPanel() {
         meridians: `assets/img/anatomy/meridians_overlay_${suffix}.png`,
         bones: `assets/img/anatomy/bones_overlay_${suffix}.png`,
         muscles: `assets/img/anatomy/muscle_overlay_${suffix}.png`,
+        muscles_2: `assets/img/anatomy/muscle_overlay_${suffix}2.png`,
+        muscles_3: `assets/img/anatomy/muscle_overlay_${suffix}3.png`,
         spiritroot: `assets/img/anatomy/spiritroot_overlay_${suffix}.png`,
+        spiritroot_alone: `assets/img/anatomy/spiritroot_${suffix}.png`,
         
         // --- NUEVOS ASSETS DANTIANS ---
         nebula: `assets/img/anatomy/nebulosa_overlay_${nebulaSuffix}.png`,
@@ -375,13 +378,22 @@ function renderAnatomyPanel() {
                 <div class="silhouette-container">
                     <img id="layer-base" src="${ASSETS_ANATOMY.base}" class="body-layer">
                     <img id="layer-bones" src="${ASSETS_ANATOMY.bones}" class="body-layer layer-hidden">
-                    <img id="layer-muscles" src="${ASSETS_ANATOMY.muscles}" class="body-layer layer-hidden">
 
                     <img id="layer-meridians" src="${ASSETS_ANATOMY.meridians}" class="body-layer layer-hidden" style="filter: drop-shadow(0 0 2px cyan);">
                     
+                    <div id="layer-muscles" class="body-layer layer-hidden" style="z-index: 40;">
+                    
+                        <img  src="${ASSETS_ANATOMY.muscles}" class="body-layer muscles_overlay" style="opacity: 0.3; filter: multiply; mix-blend-mode: mixed; z-index: 41;">
+                        <img  src="${ASSETS_ANATOMY.muscles_2}" class="body-layer muscles_overlay_2" style= "opacity: 0.9; filter: fixed ;mix-blend-mode: normal ;z-index: 42;">
+                        <img  src="${ASSETS_ANATOMY.muscles_3}" class="body-layer muscles_overlay_3" style= "opacity: 0.7; z-index: 44; mix-blend-mode: multiply ;">
+
+                    </div>
+
+                    
                     <div id="layer-spiritroot" class="body-layer layer-hidden" style="z-index: 40;">
                     
-                        <img src="${ASSETS_ANATOMY.spiritroot}" class="body-layer spiritroot-overlay" style="filter: ${currentFilter}; mix-blend-mode: mixed;">
+                        <img src="${ASSETS_ANATOMY.spiritroot}" class="body-layer spiritroot_overlay" style="filter: normal; mix-blend-mode: mixed;">
+                        <img src="${ASSETS_ANATOMY.spiritroot_alone}" class="body-layer spiritroot-overlay" style="filter: ${currentFilter}; mix-blend-mode: mixed;">
                         <img src="${ASSETS_ANATOMY.spiritroot}" class="body-layer spiritroot" style="filter: multiply; mix-blend-mode: color-dodge;">   
 
             

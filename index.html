@@ -24,24 +24,46 @@
           <button id="tab-login" class="auth-tab active">Entrar</button>
           <button id="tab-register" class="auth-tab">Registrarse</button>
         </div>
-        <div id="login-form" class="auth-form active">
-          <div class="input-group"><input type="text" id="login-username" placeholder="Nombre de Daoísta" autocomplete="off" /></div>
-          <div class="input-group"><input type="password" id="login-password" placeholder="Sello Espiritual (Contraseña)" /></div>
-          <button id="login-button" class="button primary glow-effect">Iniciar Cultivación</button>
-        </div>
-        <div id="register-form" class="auth-form">
-          <div class="input-group"><input type="text" id="register-username" placeholder="Nombre de Daoísta" autocomplete="off" /></div>
-          <div class="input-group"><input type="password" id="register-password" placeholder="Crear Sello Espiritual" /></div>
-          <button id="register-button" class="button secondary">Forjar Destino</button>
-        </div>
+        <form id="login-form" class="auth-form active" novalidate onsubmit="return false;">
+            <div class="input-group">
+                <input type="text" id="login-username" placeholder="Nombre de Daoísta" autocomplete="off" />
+            </div>
+            <div class="input-group">
+                <input type="password" id="login-password" placeholder="Sello Espiritual (Contraseña)" autocomplete="current-password" />
+            </div>
+            <button type="button" id="login-button" class="button primary glow-effect">Iniciar Cultivación</button>
+        </form>
+
+        <form id="register-form" class="auth-form" novalidate onsubmit="return false;">
+            <div class="input-group">
+                <input type="text" id="register-username" placeholder="Nombre de Daoísta" autocomplete="off" />
+            </div>
+            <div class="input-group">
+                <input type="password" id="register-password" placeholder="Crear Sello Espiritual" autocomplete="new-password" />
+            </div>
+            <button type="button" id="register-button" class="button secondary">Forjar Destino</button>
+        </form>
         <div id="auth-message" class="auth-message"></div>
       </div>
     </div>
 
-    <div id="creation-screen" class="fullscreen-screen hidden">
-        <div class="creation-container">
-            <h2 class="font-title title-gold">El Despertar del Alma</h2>
-            <div id="creation-step-container"></div>
+    <div id="screen-creation" class="game-screen active">
+        <div class="creation-panel">
+            <h1>Crónicas del Loto Eterno</h1>
+            <p>Introduce tu nombre para iniciar el ciclo del Samsara.</p>
+            
+            <div class="input-group">
+                <input type="text" id="inp-creation-name" placeholder="Nombre del Daoista..." autocomplete="off">
+                <button id="btn-creation-start" class="btn-primary">Despertar</button>
+            </div>
+
+            <div id="creation-results" class="results-panel hidden" style="margin-top: 20px; border: 1px solid gold; padding: 10px;">
+                <h3>¡Destino Revelado!</h3>
+                <p>Nombre: <span id="out-player-name"></span></p>
+                <p>Raíz Espiritual: <span id="out-player-root" style="color: cyan;"></span></p>
+                <p>Físico: <span id="out-player-physique" style="color: coral;"></span></p>
+                <button id="btn-enter-world">Entrar al Mundo</button>
+            </div>
         </div>
     </div>
 
@@ -244,6 +266,6 @@
     
     <div id="ui-overlay" class="overlay hidden"></div>
   </div>
-  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/boot.js"></script>
 </body>
 </html>

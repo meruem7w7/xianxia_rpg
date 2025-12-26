@@ -1,6 +1,6 @@
 # XIANXIA RPG - CÓDIGO COMPLETO & DOCUMENTACIÓN
 
-## ACTUALIZACIÓN DICIEMBRE 25, 2025
+## ACTUALIZACIÓN DICIEMBRE 26, 2025
 
 **Estado General: 🟢 ROBUSTO**
 - **Total Archivos**: 16 JS + 2 CSS + 1 HTML
@@ -4495,4 +4495,27 @@ export const UI = {
 
 // Exponemos el objeto UI a la ventana global para que los eventos onclick/ondrop funcionen si es necesario
 window.UI = UI;
+```
+
+## 🎯 EXPANSIONES RECIENTES (Diciembre 2025)
+
+### Arquitectura Modular Avanzada
+- **Carpetas Organizadas**: `core/` (state.js), `data/` (roots.js, physiques.js, cheats.js), `logic/` (creation.js, cultivation.js), `ui/` (auth_ui.js, creation_ui.js, dashboard.js)
+- **Boot System**: `boot.js` inicializa módulos UI en orden: AuthUI → CreationUI → DashboardUI
+- **State Management**: `core/state.js` con GameState class (Observer pattern), subscribe/update para reactividad UI
+- **Data Expansion**: 12 raíces espirituales en `data/roots.js`, 12 constituciones físicas en `data/physiques.js`
+
+### Nuevas Mecánicas Implementadas
+- **Karma Fractal**: Sistema en `logic/cultivation.js` con puntos karma, reputación Ortodoxo/Demoníaco
+- **Telar del Samsara**: Ecos persistentes en state.js, array samsara_weave para legados
+- **Sistema de Consolidación**: Elección pureza/impureza al level-up, afecta stats y lore
+- **Campos Expandidos**: karma_points, reputation_type, samsara_weave, experience, maxExperience en state.js
+
+### Integración con Informe 7.0
+- **Visión Samsara Fractal**: Preparado para simulador de vida generativa con granularidad infinita
+- **Relevancia Kármica**: Memoria selectiva en localStorage para datos relevantes
+- **Simulación Offline**: Catch-up system para mundo "vivo" independientemente
+- **Event System**: Pendiente, pero estructura preparada para reemplazar llamadas directas
+
+**Estado Actual**: 87.5% implementado, listo para QUEST_DB y NPC_DB en data.js
 ```

@@ -30,6 +30,58 @@ Los cultivadores eligen un elemento dominante durante su despertar, lo que defin
 
 ---
 
+## 4. Raíces Espirituales (12 Tipos)
+
+Las raíces espirituales representan la afinidad innata del alma con el Dao. Existen cuatro categorías principales, cada una con tres subtipos, totalizando 12 raíces únicas.
+
+### Pseudo-Raíces (Mortal Common)
+- **Raíz de Cenizas**: Afinidad con fuego residual. Buff: +5% resistencia al calor. Debuff: -10% regeneración Qi en climas fríos.
+- **Raíz de Arcilla**: Conexión terrenal básica. Buff: +10% defensa física. Debuff: -5% velocidad de movimiento.
+- **Raíz de Vapor**: Agua diluida. Buff: +5% evasión. Debuff: -10% daño elemental.
+
+### True-Raíces (Cultivator Elite)
+- **Raíz de Llama Eterna**: Fuego puro. Buff: +15% daño fuego, inmunidad quemaduras. Debuff: Riesgo de autoignición (5% chance).
+- **Raíz de Jade Celestial**: Madera divina. Buff: +20% regeneración HP/Qi. Debuff: Vulnerable a fuego (doble daño).
+- **Raíz de Tsunami**: Agua primordial. Buff: +15% control elemental. Debuff: -10% daño físico.
+
+### Heavenly-Raíces (Sect Legacy)
+- **Raíz del Fénix**: Fuego inmortal. Buff: Resurrección una vez por día. Debuff: Karma demoníaco +10 por uso.
+- **Raíz del Dragón de Jade**: Tierra sagrada. Buff: +25% defensa, aura intimidante. Debuff: -15% afinidad social.
+- **Raíz de la Garra del Tigre**: Metal letal. Buff: +20% daño crítico. Debuff: -10% precisión en ataques no letales.
+
+### Mutant-Raíces (Dao Defied)
+- **Raíz del Caos**: Mezcla impredecible. Buff: Habilidades aleatorias potentes. Debuff: Efectos secundarios aleatorios.
+- **Raíz del Vacío**: Ausencia de elementos. Buff: Inmunidad a elementos. Debuff: -50% daño elemental propio.
+- **Raíz del Samsara**: Ciclo eterno. Buff: Ecos persistentes. Debuff: Karma fluctuante.
+
+---
+
+## 5. Constituciones Físicas (12 Tipos)
+
+Las constituciones físicas determinan el cuerpo del cultivador, influyendo en stats y limitaciones.
+
+### Constituciones Débiles
+- **Cuerpo Frágil**: HP bajo, pero percepción alta. Ventaja: +20% detección secretos. Defecto: -30% HP máximo.
+- **Cuerpo Tóxico**: Resistente a venenos, pero debil físico. Ventaja: Inmunidad venenos. Defecto: -20% fuerza.
+- **Cuerpo Maldito**: Karma negativo, pero suerte en combates. Ventaja: +10% drop rate. Defecto: Tribulaciones frecuentes.
+
+### Constituciones Equilibradas
+- **Cuerpo del Guerrero**: Balance perfecto. Ventaja: Todas las técnicas marciales. Defecto: Doble recursos para avanzar.
+- **Cuerpo del Sabio**: Intelectual. Ventaja: +25% aprendizaje. Defecto: -15% constitución física.
+- **Cuerpo del Mercader**: Adaptable. Ventaja: +20% negociación. Defecto: -10% combate.
+
+### Constituciones Poderosas
+- **Cuerpo de Diamante**: Defensa extrema. Ventaja: +30% defensa. Defecto: -20% velocidad.
+- **Cuerpo del Relámpago**: Velocidad máxima. Ventaja: +25% velocidad. Defecto: -15% defensa.
+- **Cuerpo del Dragón**: Fuerza bruta. Ventaja: +20% daño físico. Defecto: -10% control elemental.
+
+### Constituciones Especiales
+- **Cuerpo del Fénix**: Regeneración. Ventaja: Auto-cura. Defecto: Débil a hielo.
+- **Cuerpo del Espíritu**: Energía pura. Ventaja: +30% Qi. Defecto: -20% HP.
+- **Cuerpo del Samsara**: Adaptable. Ventaja: Evolución con karma. Defecto: Inestable.
+
+---
+
 ## 2. Historia Principal
 ### El Origen del Reino
 Hace eones, el Reino de los Inmortales fue forjado por los **Antiguos Inmortales**, seres divinos que canalizaron el Dao para crear un refugio para la cultivación. Sin embargo, una gran catástrofe, conocida como la **Guerra de los Elementos**, sacudió el equilibrio. Sectas rivales lucharon por el control de las fuentes de Qi, resultando en la fragmentación del reino en regiones autónomas.

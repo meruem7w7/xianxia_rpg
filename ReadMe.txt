@@ -65,6 +65,31 @@
 ───────────────────────────────────────────────────────────────────────────────
 
 ═══════════════════════════════════════════════════════════════════════════════
+## 🎯 EXPANSIONES RECIENTES (DICIEMBRE 2025)
+═══════════════════════════════════════════════════════════════════════════════
+
+### Arquitectura Modular
+- **Carpetas**: `core/` (estado), `data/` (bases), `logic/` (mecánicas), `ui/` (interfaces)
+- **Boot System**: Inicialización ordenada de módulos
+- **State Management**: Observer pattern para reactividad
+
+### Nuevas Mecánicas
+- **Karma Fractal**: Puntos karma, reputación Ortodoxo/Demoníaco
+- **Telar del Samsara**: Ecos persistentes de acciones pasadas
+- **Sistema de Consolidación**: Elección pureza/impureza al level-up
+- **12 Raíces Espirituales**: Pseudo, True, Heavenly, Mutant con buffs/debuffs
+- **12 Constituciones Físicas**: Diversidad en creación de personaje
+
+### Visión Informe 7.0
+- **Simulador de Vida Generativa**: Mundo vive independientemente
+- **Relevancia Kármica**: Memoria selectiva (localStorage optimizado)
+- **Granularidad Fractal**: Combinaciones infinitas para diversidad
+
+**Estado**: 87.5% implementado, listo para quests/NPCs
+
+───────────────────────────────────────────────────────────────────────────────
+
+═══════════════════════════════════════════════════════════════════════════════
 ## 🛠️ INSTRUCCIONES DE DESARROLLO
 ═══════════════════════════════════════════════════════════════════════════════
 

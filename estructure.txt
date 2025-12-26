@@ -1,6 +1,6 @@
 # ESTRUCTURA DEL PROYECTO XIANXIA RPG
 # ═══════════════════════════════════════════════════════════════════════════
-# Última actualización: Diciembre 25, 2025
+# Última actualización: Diciembre 26, 2025
 # Estado: 🟢 ROBUSTO (16 módulos JS, 2 CSS, 1 HTML, ~3,045 líneas código)
 # ═══════════════════════════════════════════════════════════════════════════
 
@@ -48,6 +48,52 @@ xianxia_rpg/
 │   │   │ - Anatomía: dantians (mente, pecho, abdomen), raíz espiritual
 │   │   └─────
 │   │
+│   ├── 📁 core/                          # 🏗️ NÚCLEO DEL ESTADO
+│   │   └── state.js         (~150 líneas)  # GameState class, Observer pattern
+│   │       │ - subscribe/update para reactividad UI
+│   │       │ - Campos: karma_points, reputation_type, samsara_weave, experience
+│   │       └─────
+│   │
+│   ├── 📁 data/                          # 📊 BASE DE DATOS EXPANDIDA
+│   │   ├── roots.js         (~200 líneas)  # 12 raíces espirituales con lore
+│   │   │   │ - Tipos: pseudo, true, heavenly, mutant
+│   │   │   │ - Buffs, debuffs, visuales, modifiers
+│   │   │   └─────
+│   │   ├── physiques.js     (~250 líneas)  # 12 constituciones físicas
+│   │   │   │ - Ventajas, defectos, buffs, debuffs
+│   │   │   │ - Modifiers para stats
+│   │   │   └─────
+│   │   ├── cheats.js        (~50 líneas)   # Herramientas debug
+│   │   └── realms.js        (~100 líneas)  # Reinos de cultivo
+│   │
+│   ├── 📁 logic/                         # ⚙️ LÓGICA DE JUEGO
+│   │   ├── creation.js      (~100 líneas)  # Creación personaje RNG
+│   │   │   │ - Integración con roots/physiques
+│   │   │   └─────
+│   │   └── cultivation.js   (~150 líneas)  # Karma, Samsara, Consolidación
+│   │       │ - KarmaSystem: addKarma, updateReputationType
+│   │       │ - SamsaraWeave: addEcho, processEchos
+│   │       │ - CultivationSystem: gainExperience, levelUp, showConsolidationChoice
+│   │       └─────
+│   │
+│   ├── 📁 ui/                            # 🎨 INTERFACES MODULARES
+│   │   ├── auth_ui.js       (~80 líneas)   # Pantalla autenticación
+│   │   ├── creation_ui.js   (~70 líneas)   # Creación personaje
+│   │   └── dashboard.js     (~120 líneas)  # Dashboard principal
+│   │
+│   ├── MÓDULOS SECUNDARIOS
+│   ├─────────────────────────────────
+│   │
+│   ├── character_creation.js (~75 líneas) # Creación personaje (3 pasos)
+│   ├── map.js            (~75 líneas)    # Viajes entre ubicaciones
+│   ├── inventory.js      (~65 líneas)    # Gestión inventario & equipo
+│   ├── skills.js         (~65 líneas)    # Renderizado habilidades
+│   ├── crafting.js       (~90 líneas)    # Sistema crafteo
+│   ├── quest.js          (~65 líneas)    # Sistema misiones (placeholder)
+│   ├── npc.js            (~35 líneas)    # NPCs (placeholder)
+│   ├── chat.js           (~45 líneas)    # Chat local
+│   └── godmode.js        (~70 líneas)    # Herramientas debug
+│
 │   ├── ui.js             (~280 líneas)   # 🎨 INTERFAZ DE USUARIO
 │   │   │ - UI.renderCultivationPanel(): Panel Wu Xing (5 slots)
 │   │   │ - UI.handleDragStart/handleDrop(): Sistema drag-drop

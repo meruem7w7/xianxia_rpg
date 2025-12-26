@@ -1,6 +1,6 @@
 XIANXIA RPG - ERRORES & OPTIMIZACIONES
 ======================================
-Actualizado: Diciembre 25, 2025
+Actualizado: Diciembre 26, 2025
 Estado General: ✅ ROBUSTO (0 errores de compilación)
 
 ═══════════════════════════════════════════════════════════════════════════════
@@ -37,6 +37,31 @@ Ubicación:   data.js (falta agregar NPC_DB)
 Severidad:   MEDIA (sistema placeholder funcional)
 Solución:    Crear array NPC_DB con NPCs y diálogos contextuales
 Estado:      ⚠️ PENDIENTE (estructura base en npc.js está lista)
+
+═══════════════════════════════════════════════════════════════════════════════
+EXPANSIONES RECIENTES (Diciembre 2025)
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ IMPLEMENTADO: Arquitectura Modular
+─────────────────────────────────────────────────────────────────────────────
+Descripción: Reorganización en carpetas core/, data/, logic/, ui/
+Impacto:     Mejor mantenibilidad, separación de concerns
+Archivos:    boot.js, state.js, cultivation.js, auth_ui.js, etc.
+Estado:      ✅ COMPLETADO
+
+✅ IMPLEMENTADO: Sistema Karma & Samsara
+─────────────────────────────────────────────────────────────────────────────
+Descripción: Karma fractal, Telar del Samsara, Consolidación
+Impacto:     Nueva profundidad narrativa y mecánica
+Archivos:    cultivation.js, state.js (campos expandidos)
+Estado:      ✅ COMPLETADO
+
+✅ IMPLEMENTADO: 12 Raíces & Constituciones
+─────────────────────────────────────────────────────────────────────────────
+Descripción: Expansión de data con lore detallado
+Impacto:     Diversidad infinita en creación de personaje
+Archivos:    roots.js, physiques.js
+Estado:      ✅ COMPLETADO
 
 ═══════════════════════════════════════════════════════════════════════════════
 OPTIMIZACIONES (Prioritizadas por Impacto)

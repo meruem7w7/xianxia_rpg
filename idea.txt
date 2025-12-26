@@ -1,6 +1,6 @@
 # XIANXIA: ASCENSIÓN ETERNA - DOCUMENTO DE DISEÑO
 # ═══════════════════════════════════════════════════════════════════════════
-# Última actualización: Diciembre 25, 2025
+# Última actualización: Diciembre 26, 2025
 # Estado: ✅ IMPLEMENTADO (87.5% del diseño)
 # ═══════════════════════════════════════════════════════════════════════════
 
@@ -14,7 +14,21 @@
 
 ---
 
-## 🖼️ ESTÉTICA VISUAL
+## � VISIÓN DEL INFORME 7.0: EL SAMSARA FRACTAL
+
+Este proyecto evoluciona hacia un **Simulador de Vida Generativa** con mecánicas 4X, donde el mundo vive independientemente del jugador. Inspirado en novelas como "A Will Eternal", integra lore filosófico con mecánicas técnicas para diversidad infinita.
+
+**Objetivos Clave:**
+- **Granularidad Fractal**: 12 raíces espirituales × 12 constituciones físicas = combinaciones únicas
+- **Relevancia Kármica**: Memoria selectiva que refleja el Dao (solo lo importante perdura)
+- **Simulación Offline**: Mundo "vive" con catch-up al regresar
+- **Motor de Rivalidad**: NPCs con legados emocionales y consecuencias eternas
+
+**Razonamiento Personal:** Las limitaciones web (localStorage 5-10MB) se convierten en oportunidades. El almacenamiento limitado refleja la impermanencia del Samsara: solo las acciones kármicas significativas sobreviven.
+
+---
+
+## �🖼️ ESTÉTICA VISUAL
 
 ### Paleta de Colores
 
